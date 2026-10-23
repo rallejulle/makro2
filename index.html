@@ -5,229 +5,312 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>EC2211 Pluggportal</title>
   <meta name="description" content="Pluggportal för EC2211 Intermediate Macroeconomics – teori, formelblad, quiz, tentafrågor med modellsvar, provtentor, simulatorer och pluggschema.">
-  <meta name="theme-color" content="#1f5f52">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231f5f52'/%3E%3Cpath d='M12 46 Q24 14 34 30 T54 16' stroke='%23fff' stroke-width='5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+  <meta name="theme-color" content="#fbfcfd">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231f56a6'/%3E%3Cpath d='M12 46 Q24 14 34 30 T54 16' stroke='%23fff' stroke-width='5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,650&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
   <style>
+/* EC2211 Plugg – "rutat tentapapper, blå penna, gul överstrykningspenna" */
 :root {
-  --bg: #f6f4ef; --surface: #fffdf9; --surface2: #efebe2; --ink: #1c2230; --muted: #5f6673;
-  --line: #e2ddd2; --accent: #1f5f52; --accent-soft: #dcebe6; --accent-ink: #fff; --warm: #c2612b; --warm-soft: #f6e3d6;
-  --good: #2e7d4f; --good-soft: #dff0e5; --bad: #b33a3a; --bad-soft: #f6dede; --mid: #b7860b; --mid-soft: #f7edd0;
-  --s1: #1f5f52; --s2: #c2612b; --s3: #8a8f99; --s4: #3b5bb5;
-  --radius: 14px; --shadow: 0 1px 2px rgba(28,34,48,.05), 0 6px 20px rgba(28,34,48,.05);
-  --serif: "Fraunces", Georgia, serif; --sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --paper: #fbfcfd; --raised: #ffffff; --sunk: #f1f4f8; --ink: #15202e; --ink2: #4a5566; --faint: #8592a3;
+  --rule: #e3e8ef; --grid: #e9eef5;
+  --pen: #1f56a6; --pen-soft: #e8eff9; --pen-ink: #ffffff;
+  --hi: #ffe25a; --hi-soft: #fff6c4;
+  --good: #1f7a4d; --good-soft: #e3f3ea; --bad: #b4372f; --bad-soft: #fbe7e5; --mid: #9a6b00; --mid-soft: #fbf0d4;
+  --s1: #1f56a6; --s2: #d0572a; --s3: #8592a3; --s4: #1f7a4d;
+  --r: 10px; --sans: "Schibsted Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
-  --bg: #121418; --surface: #1a1d23; --surface2: #23272f; --ink: #e9e6df; --muted: #9ba1ab; --line: #2f343d;
-  --accent: #62b6a1; --accent-soft: #1d3530; --accent-ink: #0d1412; --warm: #e58c57; --warm-soft: #3a2619;
-  --good: #5cc488; --good-soft: #193524; --bad: #ec7b7b; --bad-soft: #3d1f1f; --mid: #e3b84a; --mid-soft: #3a3016;
-  --s1: #62b6a1; --s2: #e58c57; --s3: #8f96a1; --s4: #8ea8f2; color-scheme: dark; } }
+  --paper: #12161c; --raised: #181d25; --sunk: #1e242d; --ink: #e6eaf0; --ink2: #b3bcc8; --faint: #7d8796;
+  --rule: #29303a; --grid: #1b2129; --pen: #86adf0; --pen-soft: #1c2a40; --pen-ink: #0e1420;
+  --hi: #e8c93a; --hi-soft: #3a3214; --good: #63c792; --good-soft: #17301f; --bad: #ef8a80; --bad-soft: #3b1d1a; --mid: #e5b84a; --mid-soft: #362b12;
+  --s1: #86adf0; --s2: #f0915f; --s3: #7d8796; --s4: #63c792; color-scheme: dark; } }
 :root[data-theme="dark"] {
-  --bg: #121418; --surface: #1a1d23; --surface2: #23272f; --ink: #e9e6df; --muted: #9ba1ab; --line: #2f343d;
-  --accent: #62b6a1; --accent-soft: #1d3530; --accent-ink: #0d1412; --warm: #e58c57; --warm-soft: #3a2619;
-  --good: #5cc488; --good-soft: #193524; --bad: #ec7b7b; --bad-soft: #3d1f1f; --mid: #e3b84a; --mid-soft: #3a3016;
-  --s1: #62b6a1; --s2: #e58c57; --s3: #8f96a1; --s4: #8ea8f2; color-scheme: dark; }
+  --paper: #12161c; --raised: #181d25; --sunk: #1e242d; --ink: #e6eaf0; --ink2: #b3bcc8; --faint: #7d8796;
+  --rule: #29303a; --grid: #1b2129; --pen: #86adf0; --pen-soft: #1c2a40; --pen-ink: #0e1420;
+  --hi: #e8c93a; --hi-soft: #3a3214; --good: #63c792; --good-soft: #17301f; --bad: #ef8a80; --bad-soft: #3b1d1a; --mid: #e5b84a; --mid-soft: #362b12;
+  --s1: #86adf0; --s2: #f0915f; --s3: #7d8796; --s4: #63c792; color-scheme: dark; }
 
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
-body { margin: 0; background: var(--bg); color: var(--ink); font: 15.5px/1.6 var(--sans); }
-a { color: var(--accent); }
-h1, h2, h3, h4 { font-family: var(--serif); font-weight: 600; line-height: 1.25; margin: 0 0 .5em; letter-spacing: -.01em; }
-h1 { font-size: 2rem; } h2 { font-size: 1.45rem; } h3 { font-size: 1.15rem; margin-top: 1.2em; } h4 { font-size: 1rem; font-family: var(--sans); font-weight: 650; }
-p { margin: .4em 0 .8em; }
-.muted { color: var(--muted); } .small { font-size: .85rem; }
-code, kbd { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .85em; background: var(--surface2); padding: 1px 5px; border-radius: 5px; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 400 16px/1.6 var(--sans); -webkit-font-smoothing: antialiased; }
+a { color: var(--pen); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, summary:focus-visible { outline: 2px solid var(--pen); outline-offset: 2px; }
+h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; margin: 0 0 .5em; letter-spacing: -.015em; }
+h1 { font-size: 2.1rem; font-weight: 800; letter-spacing: -.03em; }
+h2 { font-size: 1.35rem; margin-top: 2rem; }
+h3 { font-size: 1.08rem; margin-top: 1.6rem; }
+h4 { font-size: .95rem; }
+p { margin: .4em 0 .9em; }
+.muted { color: var(--ink2); } .faint { color: var(--faint); } .small { font-size: .875rem; }
+.hl { background: linear-gradient(transparent 55%, var(--hi) 55%, var(--hi) 92%, transparent 92%); padding: 0 .1em; }
+.hl { color: #15202e; }
+:root[data-theme="dark"] .hl { background: none; color: var(--hi); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .hl { background: none; color: var(--hi); } }
 
-/* Layout */
-.app { display: grid; grid-template-columns: 236px minmax(0, 1fr); min-height: 100vh; }
+/* ---------- Layout ---------- */
+.app { display: grid; grid-template-columns: 220px minmax(0, 1fr); min-height: 100vh; }
 .app > div { min-width: 0; }
-.side { position: sticky; top: 0; height: 100vh; overflow-y: auto; padding: 22px 14px; border-right: 1px solid var(--line); background: var(--surface); }
-.brand { font-family: var(--serif); font-size: 1.25rem; font-weight: 650; padding: 0 10px 2px; }
-.brand small { display: block; font-family: var(--sans); font-size: .75rem; font-weight: 500; color: var(--muted); }
-.count { margin: 14px 8px 18px; padding: 12px 14px; border-radius: 12px; background: var(--accent); color: var(--accent-ink); }
-.count b { font-family: var(--serif); font-size: 1.7rem; display: block; line-height: 1.1; }
-.count span { font-size: .8rem; opacity: .9; }
-nav a { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 9px; color: var(--ink); text-decoration: none; font-size: .93rem; }
-nav a:hover { background: var(--surface2); }
-nav a.on { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
-nav .ico { width: 20px; text-align: center; opacity: .85; }
-.side-foot { margin-top: 18px; padding: 10px; display: flex; gap: 6px; flex-wrap: wrap; }
-main { padding: 34px clamp(16px, 4vw, 48px) 80px; max-width: 1080px; width: 100%; }
-.topbar { display: none; }
+.side { position: sticky; top: 0; height: 100vh; overflow-y: auto; padding: 28px 16px 20px 22px; border-right: 1px solid var(--rule); display: flex; flex-direction: column; }
+.brand { font-size: 1.05rem; font-weight: 800; letter-spacing: -.02em; }
+.brand-sub { font-size: .8rem; color: var(--faint); margin-bottom: 22px; }
+.side-count { font-size: .85rem; margin: -10px 0 22px; }
+.side-count b { font-weight: 700; }
+.navgroup { margin-bottom: 16px; }
+.navgroup > span { display: block; font-size: .78rem; color: var(--faint); padding: 0 8px 4px; }
+.side nav a { display: block; padding: 6px 8px; border-radius: 7px; color: var(--ink2); text-decoration: none; font-size: .93rem; }
+.side nav a:hover { color: var(--ink); background: var(--sunk); }
+.side nav a.on { color: var(--ink); font-weight: 600; background: var(--pen-soft); }
+.side-foot { margin-top: auto; display: flex; gap: 6px; padding-top: 16px; }
+main { padding: 44px clamp(18px, 5vw, 64px) 96px; max-width: 980px; }
+.read { max-width: 720px; }
+.tabbar { display: none; }
+
+/* sub-tabs inom en grupp */
+.subtabs { display: flex; gap: 4px; border-bottom: 1px solid var(--rule); margin: -8px 0 28px; overflow-x: auto; scrollbar-width: none; }
+.subtabs::-webkit-scrollbar { display: none; }
+.subtabs a { padding: 8px 12px; color: var(--ink2); text-decoration: none; font-size: .92rem; border-bottom: 2px solid transparent; margin-bottom: -1px; white-space: nowrap; }
+.subtabs a.on { color: var(--ink); border-color: var(--pen); font-weight: 600; }
 
 @media (max-width: 860px) {
   .app { grid-template-columns: minmax(0, 1fr); }
   .side { display: none; }
-  .topbar { display: block; position: sticky; top: 0; z-index: 20; background: var(--surface); border-bottom: 1px solid var(--line); }
-  .topbar .row { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px 4px; }
-  .topbar .brand { padding: 0; font-size: 1.05rem; }
-  .topbar .pill { background: var(--accent); color: var(--accent-ink); border-radius: 99px; padding: 2px 10px; font-size: .8rem; font-weight: 600; }
-  .topbar nav { display: flex; overflow-x: auto; gap: 2px; padding: 4px 10px 8px; scrollbar-width: none; }
-  .topbar nav::-webkit-scrollbar { display: none; }
-  .topbar nav a { white-space: nowrap; padding: 6px 10px; font-size: .85rem; }
-  main { padding: 20px 16px 80px; }
-  h1 { font-size: 1.55rem; }
+  main { padding: 22px 18px 110px; }
+  h1 { font-size: 1.7rem; }
+  .tabbar { display: grid; grid-template-columns: repeat(5, 1fr); position: fixed; bottom: 0; left: 0; right: 0; z-index: 30;
+    background: color-mix(in srgb, var(--raised) 92%, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid var(--rule); padding: 6px 4px calc(6px + env(safe-area-inset-bottom)); }
+  .tabbar a { display: flex; flex-direction: column; align-items: center; gap: 2px; font-size: .72rem; color: var(--faint); text-decoration: none; padding: 4px 0; }
+  .tabbar a svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+  .tabbar a.on { color: var(--pen); font-weight: 600; }
+  .mtop { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+  .subtabs { margin-top: 0; }
 }
+@media (min-width: 861px) { .mtop { display: none; } }
 
-/* Components */
-.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 20px; box-shadow: var(--shadow); margin-bottom: 16px; min-width: 0; }
-.grid { display: grid; gap: 16px; }
-.g2 { grid-template-columns: repeat(2, minmax(0, 1fr)); } .g3 { grid-template-columns: repeat(3, minmax(0, 1fr)); } .g4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-@media (max-width: 860px) { .g2, .g3 { grid-template-columns: 1fr; } .g4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-.stat { padding: 14px 16px; }
-.stat .v { font-family: var(--serif); font-size: 1.8rem; font-weight: 600; line-height: 1.1; }
-.stat .l { font-size: .8rem; color: var(--muted); }
-.btn { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); padding: 7px 13px; border-radius: 9px; font: inherit; font-size: .9rem; cursor: pointer; text-decoration: none; }
-.btn:hover { border-color: var(--accent); }
-.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 600; }
-.btn.warm { background: var(--warm); border-color: var(--warm); color: #fff; }
-.btn.sm { padding: 4px 9px; font-size: .8rem; }
-.btn.ghost { background: transparent; }
+/* ---------- Grundkomponenter ---------- */
+.panel { background: var(--raised); border: 1px solid var(--rule); border-radius: var(--r); padding: 20px 22px; margin-bottom: 18px; min-width: 0; }
+.panel.flat { background: var(--sunk); border-color: transparent; }
+.section { margin: 36px 0 0; }
+.section > h2:first-child { margin-top: 0; }
+.btn { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--rule); background: var(--raised); color: var(--ink); padding: 8px 14px; border-radius: 8px; font: inherit; font-size: .9rem; font-weight: 500; cursor: pointer; text-decoration: none; line-height: 1.2; }
+.btn:hover { border-color: var(--faint); }
+.btn.primary { background: var(--pen); border-color: var(--pen); color: var(--pen-ink); }
+.btn.primary:hover { filter: brightness(1.08); }
+.btn.sm { padding: 5px 10px; font-size: .82rem; }
+.btn.ghost { background: transparent; border-color: transparent; color: var(--ink2); }
+.btn.ghost:hover { color: var(--ink); background: var(--sunk); }
 .btn:disabled { opacity: .5; cursor: default; }
+.linkbtn { background: none; border: 0; padding: 0; color: var(--pen); font: inherit; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
 .row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
 .spread { justify-content: space-between; }
-.chips { display: flex; gap: 6px; flex-wrap: wrap; margin: 6px 0 14px; }
-.chip { border: 1px solid var(--line); background: var(--surface); border-radius: 99px; padding: 4px 11px; font-size: .82rem; cursor: pointer; color: var(--ink); }
-.chip.on { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
-.tag { display: inline-block; font-size: .72rem; font-weight: 600; padding: 2px 8px; border-radius: 99px; background: var(--surface2); color: var(--muted); }
-.tag.flod { background: var(--accent-soft); color: var(--accent); }
-.tag.prog { background: var(--warm-soft); color: var(--warm); }
-.tag.pts { background: var(--mid-soft); color: var(--mid); }
+.stack > * + * { margin-top: 10px; }
+.filter { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; margin: 0 0 18px; padding-bottom: 2px; }
+.filter::-webkit-scrollbar { display: none; }
+.chip { flex: none; border: 1px solid var(--rule); background: transparent; border-radius: 99px; padding: 5px 12px; font: inherit; font-size: .84rem; cursor: pointer; color: var(--ink2); white-space: nowrap; }
+.chip:hover { color: var(--ink); border-color: var(--faint); }
+.chip.on { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.meta { font-size: .8rem; color: var(--faint); }
+.pts { font-variant-numeric: tabular-nums; font-weight: 600; color: var(--ink2); }
+.badge { font-size: .74rem; font-weight: 600; padding: 2px 7px; border-radius: 5px; background: var(--sunk); color: var(--ink2); white-space: nowrap; }
+.badge.flod { background: var(--pen-soft); color: var(--pen); }
+.badge.prog { background: var(--hi-soft); color: var(--mid); }
 input[type="text"], input[type="search"], input[type="number"], textarea, select {
-  font: inherit; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 9px; padding: 8px 11px; }
-input:focus, textarea:focus, select:focus { outline: 2px solid var(--accent-soft); border-color: var(--accent); }
-textarea { width: 100%; min-height: 120px; resize: vertical; line-height: 1.5; }
-.bar { height: 8px; border-radius: 99px; background: var(--surface2); overflow: hidden; }
-.bar > i { display: block; height: 100%; background: var(--accent); border-radius: 99px; transition: width .3s; }
-.tbl { width: 100%; border-collapse: collapse; font-size: .9rem; margin: 8px 0 12px; }
-.tbl th, .tbl td { text-align: left; padding: 7px 9px; border-bottom: 1px solid var(--line); vertical-align: top; }
-.tbl th { font-size: .78rem; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); font-weight: 600; }
+  font: inherit; color: var(--ink); background: var(--raised); border: 1px solid var(--rule); border-radius: 8px; padding: 8px 11px; }
+input:focus, textarea:focus, select:focus { border-color: var(--pen); outline: none; }
+textarea { width: 100%; min-height: 140px; resize: vertical; line-height: 1.6;
+  background-image: linear-gradient(var(--grid) 1px, transparent 1px); background-size: 100% 1.6em; background-position: 0 .55em; }
+.bar { height: 4px; border-radius: 99px; background: var(--rule); overflow: hidden; }
+.bar > i { display: block; height: 100%; background: var(--pen); border-radius: 99px; transition: width .3s; }
+.tbl { width: 100%; border-collapse: collapse; font-size: .9rem; margin: 10px 0 14px; }
+.tbl th, .tbl td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+.tbl th { font-size: .8rem; color: var(--faint); font-weight: 600; }
 .tbl.num td { font-variant-numeric: tabular-nums; }
-.tbl tr.hl td { background: var(--accent-soft); }
+.tbl tr.hl td { background: var(--hi-soft); }
 .scrollx { overflow-x: auto; }
-.tip { background: var(--accent-soft); border-radius: 10px; padding: 10px 14px; }
-.warn { background: var(--warm-soft); border-radius: 10px; padding: 10px 14px; }
-details { border-top: 1px solid var(--line); }
-details > summary { cursor: pointer; padding: 12px 2px; font-weight: 600; list-style: none; display: flex; justify-content: space-between; gap: 10px; }
+.tip { border-left: 3px solid var(--pen); padding: 4px 0 4px 16px; margin: 18px 0; color: var(--ink2); }
+.warn { border-left: 3px solid var(--hi); padding: 4px 0 4px 16px; margin: 18px 0; }
+details > summary { cursor: pointer; list-style: none; }
 details > summary::-webkit-details-marker { display: none; }
-details > summary::after { content: "+"; color: var(--muted); font-weight: 400; }
-details[open] > summary::after { content: "–"; }
 .katex-display { overflow-x: auto; overflow-y: hidden; padding: 4px 0; }
-.hero { display: flex; justify-content: space-between; gap: 18px; align-items: flex-end; flex-wrap: wrap; margin-bottom: 20px; }
-.hero p { margin: 0; color: var(--muted); }
+.page-head { margin-bottom: 28px; }
+.page-head p { color: var(--ink2); margin: 0; max-width: 60ch; }
+
+/* ---------- Idag ---------- */
+.hero { position: relative; border-radius: 14px; padding: 30px 30px 26px; margin-bottom: 34px; border: 1px solid var(--rule);
+  background-color: var(--raised);
+  background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 22px 22px; background-position: -1px -1px; overflow: hidden; }
+.hero-grid { display: grid; grid-template-columns: auto 1fr; gap: 10px 34px; align-items: end; }
+.days { display: inline-block; justify-self: start; font-size: clamp(5rem, 12vw, 8.5rem); font-weight: 800; line-height: .85; letter-spacing: -.06em; position: relative; z-index: 1; font-variant-numeric: tabular-nums; }
+.days::after { content: ""; position: absolute; left: -6%; right: -10%; bottom: 8%; height: 30%; background: var(--hi); z-index: -1; transform: rotate(-2deg); border-radius: 3px; opacity: .9; }
+.hero h1 { font-size: 1.5rem; margin: 0 0 4px; }
+.hero p { margin: 0; color: var(--ink2); }
+.hero .bar { margin-top: 16px; max-width: 340px; }
+@media (max-width: 600px) { .hero { padding: 22px 20px; } .hero-grid { grid-template-columns: 1fr; } }
+
+.tasks { list-style: none; padding: 0; margin: 0; }
+.task { display: flex; gap: 12px; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid var(--rule); }
+.task:last-child { border-bottom: 0; }
+.task input { margin-top: 4px; accent-color: var(--pen); width: 18px; height: 18px; flex: none; }
+.task a { color: var(--ink); text-decoration: none; }
+.task a:hover { color: var(--pen); text-decoration: underline; }
+.task.done a { text-decoration: line-through; color: var(--faint); }
+.focus-list { list-style: none; padding: 0; margin: 0; }
+.focus-list li { display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--rule); }
+.focus-list li:last-child { border-bottom: 0; }
+.focus-list a { color: var(--ink); font-weight: 500; text-decoration: none; }
+.focus-list a:hover { color: var(--pen); }
+.two { display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; }
+@media (max-width: 860px) { .two { grid-template-columns: 1fr; gap: 10px; } }
+.grade-row { display: flex; gap: 22px; flex-wrap: wrap; margin-top: 12px; }
+.grade-row div { font-size: .85rem; color: var(--ink2); }
+.grade-row b { display: block; font-size: 1.5rem; color: var(--ink); font-variant-numeric: tabular-nums; }
+.more { margin-top: 36px; border-top: 1px solid var(--rule); }
+.more > summary { padding: 16px 0; color: var(--ink2); font-weight: 500; }
+.more > summary::before { content: "+ "; color: var(--faint); }
+.more[open] > summary::before { content: "– "; }
 
 /* Heatmap */
-.heat { border-collapse: separate; border-spacing: 3px; font-size: .78rem; width: 100%; }
-.heat th { font-weight: 600; color: var(--muted); text-align: center; padding: 2px; }
-.heat th.tn { text-align: left; color: var(--ink); white-space: nowrap; font-weight: 500; }
-.heat td { text-align: center; border-radius: 6px; padding: 5px 2px; min-width: 34px; font-variant-numeric: tabular-nums; }
-.heat .flodcol { box-shadow: inset 0 -2px 0 var(--accent); }
+.heat { border-collapse: separate; border-spacing: 2px; font-size: .78rem; width: 100%; }
+.heat th { font-weight: 500; color: var(--faint); text-align: center; padding: 2px; }
+.heat th.tn { text-align: left; color: var(--ink); white-space: nowrap; font-weight: 500; padding-right: 8px; }
+.heat td { text-align: center; border-radius: 4px; padding: 5px 2px; min-width: 34px; font-variant-numeric: tabular-nums; }
+.heat .fl { color: var(--pen); font-weight: 600; }
 
-/* Schedule */
-.day { border-left: 3px solid var(--line); padding: 2px 0 2px 16px; margin-bottom: 20px; }
-.day.today { border-color: var(--warm); }
-.day.past { opacity: .65; }
+/* Schema */
+.day { display: grid; grid-template-columns: 110px 1fr; gap: 20px; padding: 22px 0; border-top: 1px solid var(--rule); }
+.day .when { font-size: .9rem; color: var(--ink2); }
+.day .when b { display: block; font-size: 1.6rem; color: var(--ink); font-weight: 800; letter-spacing: -.03em; line-height: 1.1; }
+.day.today .when b { display: inline; background: linear-gradient(transparent 55%, var(--hi) 55%, var(--hi) 92%, transparent 92%); }
+.day.past { opacity: .55; }
 .day h3 { margin: 0 0 4px; }
-.task { display: flex; gap: 10px; align-items: flex-start; padding: 6px 0; }
-.task input { margin-top: 5px; accent-color: var(--accent); width: 17px; height: 17px; flex: none; }
-.task.done span { text-decoration: line-through; color: var(--muted); }
+@media (max-width: 600px) { .day { grid-template-columns: 1fr; gap: 6px; } .day .when b { display: inline; margin-right: 8px; font-size: 1.2rem; } }
+
+/* Teori */
+.topics { list-style: none; padding: 0; margin: 0; }
+.topics a { display: grid; grid-template-columns: 70px 1fr auto; gap: 14px; align-items: baseline; padding: 14px 0; border-bottom: 1px solid var(--rule); color: var(--ink); text-decoration: none; }
+.topics a:hover .tn { color: var(--pen); }
+.topics .ln { color: var(--faint); font-size: .85rem; font-variant-numeric: tabular-nums; }
+.topics .tn { font-weight: 600; }
+.topics .tl { display: block; color: var(--ink2); font-size: .88rem; font-weight: 400; margin-top: 2px; }
+@media (max-width: 600px) { .topics a { grid-template-columns: 1fr auto; } .topics .ln { display: none; } }
+.lead { font-size: 1.12rem; color: var(--ink); border-left: 3px solid var(--hi); padding-left: 16px; margin: 0 0 28px; }
+.sec { border-top: 1px solid var(--rule); }
+.sec > summary { padding: 16px 0; font-weight: 650; font-size: 1.05rem; display: flex; justify-content: space-between; gap: 12px; }
+.sec > summary::after { content: "+"; color: var(--faint); font-weight: 400; }
+.sec[open] > summary::after { content: "–"; }
+.sec > div { padding-bottom: 14px; }
+.conf { display: inline-flex; gap: 4px; }
+.conf button { border: 1px solid var(--rule); background: transparent; color: var(--ink2); padding: 5px 11px; font: inherit; font-size: .82rem; cursor: pointer; border-radius: 7px; }
+.conf button.on[data-v="1"] { background: var(--bad-soft); color: var(--bad); border-color: transparent; font-weight: 600; }
+.conf button.on[data-v="2"] { background: var(--mid-soft); color: var(--mid); border-color: transparent; font-weight: 600; }
+.conf button.on[data-v="3"] { background: var(--good-soft); color: var(--good); border-color: transparent; font-weight: 600; }
+.dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; background: var(--rule); vertical-align: middle; }
+.dot.c1 { background: var(--bad); } .dot.c2 { background: var(--mid); } .dot.c3 { background: var(--good); }
+
+/* Formler */
+.fgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 0 28px; }
+.fcard { padding: 14px 0; border-bottom: 1px solid var(--rule); min-width: 0; }
+.fcard .fn { font-weight: 600; font-size: .9rem; }
+.fcard .ftex { margin: 4px 0; min-height: 40px; display: flex; align-items: center; overflow-x: auto; }
+.fcard.hidden .ftex { filter: blur(7px); cursor: pointer; }
+.fcard .fw { font-size: .82rem; color: var(--ink2); }
+.fgroup { margin-top: 28px; font-size: 1rem; color: var(--ink2); font-weight: 600; }
 
 /* Quiz */
-.opt { display: block; width: 100%; text-align: left; border: 1.5px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 11px; padding: 11px 14px; margin: 8px 0; cursor: pointer; font: inherit; }
-.opt:hover:not(:disabled) { border-color: var(--accent); }
+.qcard { max-width: 680px; }
+.qtext { font-size: 1.15rem; font-weight: 600; line-height: 1.45; margin-bottom: 18px; }
+.opt { display: flex; gap: 12px; width: 100%; text-align: left; border: 1px solid var(--rule); background: var(--raised); color: var(--ink); border-radius: 10px; padding: 12px 14px; margin: 8px 0; cursor: pointer; font: inherit; align-items: baseline; }
+.opt .k { color: var(--faint); font-size: .85rem; font-variant-numeric: tabular-nums; }
+.opt:hover:not(:disabled) { border-color: var(--pen); }
 .opt.right { border-color: var(--good); background: var(--good-soft); }
 .opt.wrong { border-color: var(--bad); background: var(--bad-soft); }
 .opt:disabled { cursor: default; }
-.expl { margin-top: 10px; padding: 10px 14px; border-radius: 10px; background: var(--surface2); }
-.kbdhint { font-size: .78rem; color: var(--muted); }
+.expl { margin-top: 14px; padding: 12px 16px; border-radius: 10px; background: var(--sunk); }
+.acc-row { display: grid; grid-template-columns: 1fr 1fr 48px; gap: 14px; align-items: center; padding: 7px 0; font-size: .88rem; }
 
-/* Exam questions */
-.q-head { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: 8px; }
-.model { margin-top: 12px; padding: 14px 16px; border-radius: 12px; background: var(--surface2); border-left: 3px solid var(--accent); }
-.keys label { display: flex; gap: 9px; padding: 4px 0; cursor: pointer; }
-.keys input { accent-color: var(--accent); margin-top: 4px; }
-.score { font-weight: 700; }
+/* Tentafrågor */
+.qlist { border-top: 1px solid var(--rule); }
+.qitem { border-bottom: 1px solid var(--rule); }
+.qitem > summary { display: grid; grid-template-columns: 46px 1fr auto; gap: 14px; padding: 14px 0; align-items: baseline; }
+.qitem > summary:hover .qx { color: var(--ink); }
+.qitem .qx { color: var(--ink2); overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.qitem[open] .qx { color: var(--ink); -webkit-line-clamp: unset; display: block; }
+.qitem .qx .katex-display { display: none; }
+.qitem[open] .qx .katex-display { display: block; }
+.qitem .done-mark { color: var(--good); font-weight: 600; font-size: .82rem; white-space: nowrap; }
+.qbody { padding: 0 0 22px 60px; }
+@media (max-width: 600px) { .qitem > summary { grid-template-columns: 38px 1fr; } .qitem > summary .side-meta { grid-column: 2; } .qbody { padding-left: 0; } }
+.model { margin-top: 14px; padding: 16px 18px; border-radius: 10px; background: var(--sunk); }
+.keys { margin-top: 14px; }
+.keys label { display: flex; gap: 10px; padding: 4px 0; cursor: pointer; font-size: .92rem; }
+.keys input { accent-color: var(--pen); margin-top: 5px; }
+.score { font-weight: 700; font-variant-numeric: tabular-nums; }
 
 /* Flashcards */
-.flash { perspective: 1200px; cursor: pointer; min-height: 230px; }
-.flash .inner { position: relative; min-height: 230px; transition: transform .45s; transform-style: preserve-3d; }
+.flash { perspective: 1200px; cursor: pointer; max-width: 560px; margin: 0 auto; }
+.flash .inner { position: relative; min-height: 260px; transition: transform .45s; transform-style: preserve-3d; }
 .flash.flip .inner { transform: rotateY(180deg); }
-.flash .face { position: absolute; inset: 0; backface-visibility: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 26px; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow); }
-.flash .back { transform: rotateY(180deg); background: var(--accent-soft); }
-.flash .term { font-family: var(--serif); font-size: 1.5rem; }
+.flash .face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 30px; border-radius: 14px; border: 1px solid var(--rule);
+  background-color: var(--raised); background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px); background-size: 22px 22px; }
+.flash .back { transform: rotateY(180deg); }
+.flash .term { font-size: 1.6rem; font-weight: 800; letter-spacing: -.02em; }
+@media (prefers-reduced-motion: reduce) { .flash .inner { transition: none; } }
 
-/* Formulas */
-.fgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; }
-.fcard { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; min-width: 0; }
-.fcard .fn { font-weight: 600; font-size: .9rem; display: flex; justify-content: space-between; gap: 8px; }
-.fcard .ftex { margin: 6px 0; min-height: 44px; display: flex; align-items: center; overflow-x: auto; }
-.fcard.hidden .ftex { filter: blur(7px); cursor: pointer; }
-.fcard .fw { font-size: .82rem; color: var(--muted); }
-
-/* Charts */
+/* Diagram */
 .chart { width: 100%; height: auto; display: block; font-family: var(--sans); }
-.chart .grid line { stroke: var(--line); stroke-width: 1; }
-.chart .tick { fill: var(--muted); font-size: 11px; }
-.chart .lbl { fill: var(--muted); font-size: 12px; }
+.chart .grid line { stroke: var(--grid); stroke-width: 1; }
+.chart .tick { fill: var(--faint); font-size: 11px; }
+.chart .lbl { fill: var(--ink2); font-size: 12px; }
 .chart .lbl.small { font-size: 11px; }
-.chart .axis { stroke: var(--muted); stroke-width: 1.2; }
-.chart .zero { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 2 3; }
-.chart .vline { stroke: var(--warm); stroke-width: 1; stroke-dasharray: 3 3; }
-.chart .hline { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 4 3; }
-.chart .hline.faint { opacity: .6; }
+.chart .axis { stroke: var(--ink2); stroke-width: 1.2; }
+.chart .zero { stroke: var(--faint); stroke-width: 1; stroke-dasharray: 2 3; }
+.chart .vline { stroke: var(--faint); stroke-width: 1; stroke-dasharray: 3 3; }
+.chart .hline { stroke: var(--faint); stroke-width: 1; stroke-dasharray: 4 3; }
 .chart .line { fill: none; stroke-linejoin: round; stroke-linecap: round; }
 .chart .line.s1 { stroke: var(--s1); } .chart .line.s2 { stroke: var(--s2); } .chart .line.s3 { stroke: var(--s3); } .chart .line.s4 { stroke: var(--s4); }
 .chart .slbl { font-size: 12px; font-weight: 600; } .chart .slbl.s1 { fill: var(--s1); } .chart .slbl.s2 { fill: var(--s2); }
-.chart .pt { fill: var(--surface); stroke: var(--ink); stroke-width: 2; } .chart .pt.new { stroke: var(--warm); }
-.legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: .8rem; color: var(--muted); margin-top: 4px; }
+.chart .pt { fill: var(--raised); stroke: var(--ink); stroke-width: 2; } .chart .pt.new { stroke: var(--s2); }
+.legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: .8rem; color: var(--ink2); margin-top: 6px; }
 .legend .sw { display: inline-block; width: 16px; height: 3px; border-radius: 2px; vertical-align: middle; margin-right: 5px; }
 .legend .sw.s1 { background: var(--s1); } .legend .sw.s2 { background: var(--s2); } .legend .sw.s3 { background: var(--s3); } .legend .sw.s4 { background: var(--s4); }
-.legend .sw.dashed { background: repeating-linear-gradient(90deg, currentColor 0 4px, transparent 4px 7px); color: var(--muted); }
-.sim-controls { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px 18px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; margin-bottom: 14px; }
-.sim-controls label { display: flex; flex-direction: column; gap: 4px; font-size: .85rem; }
-.sim-controls input[type=range] { accent-color: var(--accent); width: 100%; }
-.sim-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.legend .sw.dashed { background: repeating-linear-gradient(90deg, var(--ink2) 0 4px, transparent 4px 7px); }
+.sim-controls { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px 24px; padding: 4px 0 22px; border-bottom: 1px solid var(--rule); margin-bottom: 22px; }
+.sim-controls label { display: flex; flex-direction: column; gap: 4px; font-size: .85rem; color: var(--ink2); }
+.sim-controls input[type=range] { accent-color: var(--pen); width: 100%; }
+.sim-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px 34px; }
+.sim-grid .card h4, .card h4 { font-weight: 600; margin-bottom: 8px; }
+.sim-grid .card, .card { min-width: 0; margin-bottom: 18px; }
 @media (max-width: 860px) { .sim-grid { grid-template-columns: 1fr; } }
 
-/* Timer */
-.timer { font-family: var(--serif); font-size: 2.2rem; font-variant-numeric: tabular-nums; }
-.sticky-timer { position: sticky; top: 0; z-index: 10; background: var(--bg); padding: 8px 0; border-bottom: 1px solid var(--line); margin-bottom: 14px; }
-@media (max-width: 860px) { .sticky-timer { top: 84px; } }
+/* Provtenta & timer */
+.timer { font-size: 2rem; font-weight: 800; font-variant-numeric: tabular-nums; letter-spacing: -.02em; }
+.sticky-timer { position: sticky; top: 0; z-index: 10; background: var(--paper); padding: 10px 0; border-bottom: 1px solid var(--rule); margin-bottom: 20px; }
+.mocks { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--rule); }
+.mocks li { display: flex; justify-content: space-between; gap: 16px; align-items: center; padding: 18px 0; border-bottom: 1px solid var(--rule); }
+.mocks h3 { margin: 0 0 2px; }
 
-/* Drill */
-.drill-ans { display: flex; gap: 12px; flex-wrap: wrap; margin: 12px 0; }
-.drill-ans label { display: flex; flex-direction: column; font-size: .8rem; color: var(--muted); gap: 3px; }
+/* Räkna */
+.drill-ans { display: flex; gap: 14px; flex-wrap: wrap; margin: 14px 0; }
+.drill-ans label { display: flex; flex-direction: column; font-size: .8rem; color: var(--ink2); gap: 4px; }
 .drill-ans input { width: 130px; }
 .ok { color: var(--good); font-weight: 600; } .no { color: var(--bad); font-weight: 600; }
 
-/* Theory */
-.theory-sec { margin-bottom: 4px; }
-.pitfalls li { margin-bottom: 4px; }
-.conf { display: inline-flex; border: 1px solid var(--line); border-radius: 9px; overflow: hidden; }
-.conf button { border: 0; background: var(--surface); color: var(--ink); padding: 6px 11px; font: inherit; font-size: .82rem; cursor: pointer; border-right: 1px solid var(--line); }
-.conf button:last-child { border-right: 0; }
-.conf button.on[data-v="1"] { background: var(--bad-soft); color: var(--bad); font-weight: 600; }
-.conf button.on[data-v="2"] { background: var(--mid-soft); color: var(--mid); font-weight: 600; }
-.conf button.on[data-v="3"] { background: var(--good-soft); color: var(--good); font-weight: 600; }
-.topic-list a { display: flex; justify-content: space-between; gap: 10px; padding: 12px 14px; border-radius: 11px; text-decoration: none; color: var(--ink); border: 1px solid var(--line); background: var(--surface); margin-bottom: 8px; }
-.topic-list a:hover { border-color: var(--accent); }
-.dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; background: var(--surface2); border: 1px solid var(--line); }
-.dot.c1 { background: var(--bad); border-color: var(--bad); } .dot.c2 { background: var(--mid); border-color: var(--mid); } .dot.c3 { background: var(--good); border-color: var(--good); }
-
-.toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--ink); color: var(--bg); padding: 9px 16px; border-radius: 10px; font-size: .88rem; z-index: 50; opacity: 0; transition: opacity .2s; pointer-events: none; }
+.toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: var(--ink); color: var(--paper); padding: 9px 16px; border-radius: 9px; font-size: .88rem; z-index: 50; opacity: 0; transition: opacity .2s; pointer-events: none; }
 .toast.show { opacity: 1; }
+@media (max-width: 860px) { .toast { bottom: 88px; } }
 
 @media print {
-  .side, .topbar, .noprint, .btn, .chips { display: none !important; }
+  .side, .tabbar, .mtop, .subtabs, .noprint, .btn, .filter { display: none !important; }
   .app { display: block; } main { padding: 0; max-width: none; }
-  .card, .fcard { box-shadow: none; break-inside: avoid; }
   body { background: #fff; color: #000; font-size: 12px; }
   .fcard.hidden .ftex { filter: none; }
 }
+@media (min-width: 861px) { .subtabs.mobile { display: none; } }
 
 </style>
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
@@ -236,19 +319,17 @@ details[open] > summary::after { content: "–"; }
 <body>
   <div class="app">
     <aside class="side">
-      <div class="brand">EC2211 Plugg<small>Intermediate Macroeconomics</small></div>
-      <div class="count" id="countdown"></div>
+      <div class="brand">EC2211 Plugg</div>
+      <div class="brand-sub">Intermediate Macroeconomics</div>
+      <div class="side-count" id="countdown"></div>
       <nav id="nav"></nav>
-      <div class="side-foot"><button class="btn sm themebtn" title="Byt tema">◐ Tema</button><button class="btn sm" onclick="print()">⎙ Skriv ut</button></div>
+      <div class="side-foot"><button class="btn sm ghost themebtn"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16z" fill="currentColor"/></svg> Mörkt / ljust</button></div>
     </aside>
     <div>
-      <header class="topbar">
-        <div class="row"><div class="brand">EC2211 Plugg</div><div class="row" style="gap:8px"><span class="pill" id="mcount"></span><button class="btn sm themebtn" title="Byt tema">◐</button></div></div>
-        <nav id="mnav"></nav>
-      </header>
       <main id="main"></main>
     </div>
   </div>
+  <nav class="tabbar" id="tabbar"></nav>
   <div class="toast" id="toast"></div>
 
   <script>
@@ -256,18 +337,18 @@ details[open] > summary::after { content: "–"; }
 const R = String.raw;
 
 const TOPICS = [
-  { id: "t1",  ln: "LN1",      name: "Mäta ekonomin",               en: "Measuring the economy" },
-  { id: "t2",  ln: "LN2",      name: "Produktion & tillväxtbokföring", en: "Production & growth accounting" },
-  { id: "t3",  ln: "LN2–3",    name: "Solowmodellen",               en: "The Solow model" },
-  { id: "t4",  ln: "LN4",      name: "Malthus, Romer & institutioner", en: "Ideas, institutions & growth" },
-  { id: "t5",  ln: "LN5a",     name: "Arbetsutbud & arbetslöshet",  en: "Labor supply & unemployment" },
-  { id: "t6",  ln: "LN5b",     name: "Konsumtion & investering",    en: "Consumption & investment" },
-  { id: "t7",  ln: "LN6",      name: "IS–MP–PC",                    en: "The short run: IS–MP–PC" },
-  { id: "t8",  ln: "LN7",      name: "AS–AD, Taylor & tidsinkonsistens", en: "AS–AD, Taylor rule, time inconsistency" },
-  { id: "t9",  ln: "LN8",      name: "Penningpolitik i praktiken",  en: "Monetary policy in practice" },
-  { id: "t10", ln: "LN9",      name: "Finanspolitik & statsskuld",  en: "Fiscal policy & government debt" },
-  { id: "t11", ln: "LN10",     name: "Växelkurser & öppen ekonomi", en: "Exchange rates & international finance" },
-  { id: "t12", ln: "LN11a–b",  name: "Betalningsbalans & dollarn",  en: "Balance of payments & int. monetary system" },
+  { id: "t1", short: "Mätning",  ln: "LN1",      name: "Mäta ekonomin",               en: "Measuring the economy" },
+  { id: "t2", short: "Tillväxtbokföring",  ln: "LN2",      name: "Produktion & tillväxtbokföring", en: "Production & growth accounting" },
+  { id: "t3", short: "Solow",  ln: "LN2–3",    name: "Solowmodellen",               en: "The Solow model" },
+  { id: "t4", short: "Malthus & Romer",  ln: "LN4",      name: "Malthus, Romer & institutioner", en: "Ideas, institutions & growth" },
+  { id: "t5", short: "Arbetsmarknad",  ln: "LN5a",     name: "Arbetsutbud & arbetslöshet",  en: "Labor supply & unemployment" },
+  { id: "t6", short: "Konsumtion",  ln: "LN5b",     name: "Konsumtion & investering",    en: "Consumption & investment" },
+  { id: "t7", short: "IS–MP–PC",  ln: "LN6",      name: "IS–MP–PC",                    en: "The short run: IS–MP–PC" },
+  { id: "t8", short: "AS–AD",  ln: "LN7",      name: "AS–AD, Taylor & tidsinkonsistens", en: "AS–AD, Taylor rule, time inconsistency" },
+  { id: "t9", short: "Penningpolitik",  ln: "LN8",      name: "Penningpolitik i praktiken",  en: "Monetary policy in practice" },
+  { id: "t10", short: "Finanspolitik", ln: "LN9",      name: "Finanspolitik & statsskuld",  en: "Fiscal policy & government debt" },
+  { id: "t11", short: "Växelkurser", ln: "LN10",     name: "Växelkurser & öppen ekonomi", en: "Exchange rates & international finance" },
+  { id: "t12", short: "Betalningsbalans", ln: "LN11a–b",  name: "Betalningsbalans & dollarn",  en: "Balance of payments & int. monetary system" },
 ];
 
 const topicName = id => (TOPICS.find(t => t.id === id) || {}).name || id;
@@ -1185,61 +1266,61 @@ const SCHEDULE = [
    ["Teori: LN1 Mäta ekonomin","#teori/t1"],
    ["Teori: LN2 Produktion & tillväxtbokföring","#teori/t2"],
    ["Räkneträning: tillväxt, PPP, tillväxtbokföring (10 st)","#rakna"],
-   ["Tentafrågor: g1, g2, g3, g4, n1","#tenta?t=t2"],
-   ["Quiz: t1 + t2","#quiz?t=t1,t2"] ]},
+   ["Tentafrågor (5 st)","#tenta?t=t2"],
+   ["Quiz på dagens ämnen","#quiz?t=t1,t2"] ]},
  { date:"2026-10-24", title:"Solowmodellen – tentans säkraste 25 p", focus:["t3"], tasks:[
    ["Teori: Solow (hela)","#teori/t3"],
    ["Simulator: kör s↑, s↓, n↓, δ↓, A↑ och rita av graferna för hand","#sim/solow"],
-   ["Skriv s1 (härledning Δk) för hand utan att titta","#tenta?t=t3"],
-   ["Tentafrågor: s2, s3, s4, s5 – skriv fullständiga svar","#tenta?t=t3"],
-   ["Quiz: t3","#quiz?t=t3"],
-   ["Flashcards: t2–t3","#flash?t=t2,t3"] ]},
+   ["Skriv härledningen av Δk för hand utan att titta","#tenta?t=t3"],
+   ["Tentafrågor (4 st) – skriv fullständiga svar","#tenta?t=t3"],
+   ["Quiz på dagens ämnen","#quiz?t=t3"],
+   ["Flashcards om tillväxt","#flash?t=t2,t3"] ]},
  { date:"2026-10-25", title:"Malthus, Romer, institutioner + essäträning", focus:["t4"], tasks:[
    ["Teori: LN4","#teori/t4"],
-   ["Tentafrågor: m1, m4, m6, m7","#tenta?t=t4"],
-   ["Essä: m5 Solow/Malthus/Romer – skriv på 35 min","#tenta?t=t4"],
-   ["Repetera Solow: s6, s7, s8","#tenta?t=t3"],
-   ["Quiz: t4 + t3 (blandat)","#quiz?t=t3,t4"] ]},
+   ["Tentafrågor (4 st)","#tenta?t=t4"],
+   ["Essä: Solow/Malthus/Romer – skriv på 35 min","#tenta?t=t4"],
+   ["Repetera Solow: tre frågor till","#tenta?t=t3"],
+   ["Quiz på dagens ämnen","#quiz?t=t3,t4"] ]},
  { date:"2026-10-26", title:"Hushåll: arbete, konsumtion, investering (+ föreläsning: extra problem set)", focus:["t5","t6"], tasks:[
    ["Gå på föreläsningen 26/10 – extra problem set (PS5) gås igenom","#tenta?t=t10"],
    ["Teori: LN5a arbetsutbud & arbetslöshet","#teori/t5"],
    ["Teori: LN5b konsumtion & investering","#teori/t6"],
-   ["Tentafrågor: l1, l2, l3, l5, c1, c2, c3","#tenta?t=t5,t6"],
+   ["Tentafrågor (7 st)","#tenta?t=t5,t6"],
    ["Räkneträning: bathtub, Euler, arbetsutbud","#rakna"],
-   ["Quiz: t5 + t6","#quiz?t=t5,t6"] ]},
+   ["Quiz på dagens ämnen","#quiz?t=t5,t6"] ]},
  { date:"2026-10-27", title:"Kort sikt: IS–MP–PC och AS–AD", focus:["t7","t8"], tasks:[
    ["Teori: LN6 IS–MP–PC","#teori/t7"],
    ["Teori: LN7 AS–AD, Taylor, tidsinkonsistens","#teori/t8"],
    ["Simulator AS–AD: sänkt mål (adaptiv vs förankrad), kostnadschock, efterfrågechock","#sim/asad"],
-   ["Tentafrågor: a1, a2, a6, a7 (alla Flodén!)","#tenta?t=t8"],
-   ["Tentafrågor: i1, i2, a3","#tenta?t=t7,t8"],
-   ["Quiz: t7 + t8","#quiz?t=t7,t8"] ]},
+   ["Tentafrågor (4 st, alla från Flodén)","#tenta?t=t8"],
+   ["Tentafrågor (3 st)","#tenta?t=t7,t8"],
+   ["Quiz på dagens ämnen","#quiz?t=t7,t8"] ]},
  { date:"2026-10-28", title:"Penningpolitik i praktiken + finanspolitik", focus:["t9","t10"], tasks:[
    ["Teori: LN8","#teori/t9"],
    ["Teori: LN9","#teori/t10"],
-   ["Tentafrågor: f1, f2, f3, f4, f5, n5","#tenta?t=t10"],
-   ["Essä: p1 Great Inflation (25 min)","#tenta?t=t9"],
+   ["Tentafrågor (6 st)","#tenta?t=t10"],
+   ["Essä: Great Inflation (25 min)","#tenta?t=t9"],
    ["Räkneträning: multiplikator, skulddynamik, Taylorregel","#rakna"],
-   ["Quiz: t9 + t10","#quiz?t=t9,t10"] ]},
+   ["Quiz på dagens ämnen","#quiz?t=t9,t10"] ]},
  { date:"2026-10-29", title:"Öppen ekonomi", focus:["t11","t12"], tasks:[
    ["Teori: LN10 växelkurser","#teori/t11"],
    ["Teori: LN11 betalningsbalans & dollarn","#teori/t12"],
-   ["Tentafrågor: o1 (25p Flodén!), o2, o3, o4, o7","#tenta?t=t11,t12"],
-   ["Tentafrågor: o5, o6, o8, o9, o10","#tenta?t=t11,t12"],
-   ["Quiz: t11 + t12","#quiz?t=t11,t12"] ]},
+   ["Tentafrågor (5 st, bland annat en 25-poängare från Flodén)","#tenta?t=t11,t12"],
+   ["Tentafrågor (5 st)","#tenta?t=t11,t12"],
+   ["Quiz på dagens ämnen","#quiz?t=t11,t12"] ]},
  { date:"2026-10-30", title:"Provtenta 1 – 4 timmar, skarpt läge", focus:[], tasks:[
    ["Provtenta 1 (Flodén-format), 4h timer, inga hjälpmedel","#mock"],
    ["Rätta själv med rättningspunkterna, notera poäng","#mock"],
    ["Gå igenom alla missade punkter i Teori","#oversikt"],
-   ["Essä: f6 skuldhållbarhet & prisstabilitet – disposition","#tenta?t=t10"] ]},
+   ["Essä: skuldhållbarhet & prisstabilitet – disposition","#tenta?t=t10"] ]},
  { date:"2026-10-31", title:"Svaga områden + formler", focus:[], tasks:[
-   ["Kolla 'Svagaste ämnen' i Översikt och repetera de tre sämsta","#oversikt"],
+   ["Repetera de tre ämnena överst under Fokusera på","#oversikt"],
    ["Formelblad: täck över och skriv alla formler ur minnet","#formler"],
-   ["Quiz: 'Repetera fel' – alla tidigare felsvar","#quiz?mode=wrong"],
-   ["Prognosfrågor (nytt material 2026): n1–n5, o9, o10","#tenta?src=Prognos"] ]},
+   ["Quiz med bara dina tidigare fel","#quiz?mode=wrong"],
+   ["Prognosfrågor om det nya materialet 2026","#tenta?src=Prognos"] ]},
  { date:"2026-11-01", title:"Provtenta 2 + lätt repetition", focus:[], tasks:[
    ["Provtenta 2 (gärna förmiddag, samma tid som tentan)","#mock"],
-   ["Flashcards: alla","#flash"],
+   ["Flashcards, alla ämnen","#flash"],
    ["Läs alla 'Vanliga fel' i Teori","#teori"],
    ["Packa: legitimation, pennor, linjal, suddgummi. Sov 8h.","#strategi"] ]},
  { date:"2026-11-02", title:"TENTA 🎯", focus:[], tasks:[
@@ -1700,6 +1781,7 @@ const App = (() => {
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
   const pct = (a, b) => b ? Math.round(100 * a / b) : 0;
+  const plain = html => html.replace(/<[^>]+>/g, " ").replace(/\$\$?([^$]+)\$\$?/g, "$1").replace(/\\[a-zA-Z]+/g, "").replace(/[{}^_]/g, "").replace(/\s+/g, " ").trim();
 
   // ---------- Lagring ----------
   const blank = () => ({ tasks: {}, quiz: {}, exam: {}, conf: {}, flash: {}, mock: {}, drills: {}, quizPts: null, theme: null });
@@ -1718,7 +1800,8 @@ const App = (() => {
   const today = () => { const d = new Date(); return new Date(d.getFullYear(), d.getMonth(), d.getDate()); };
   const iso = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
   const daysLeft = () => Math.round((EXAM_DATE - today()) / 864e5);
-  const fmtDate = s => { const [y, m, d] = s.split("-").map(Number); return new Date(y, m - 1, d).toLocaleDateString("sv-SE", { weekday: "long", day: "numeric", month: "long" }); };
+  const parseD = s => { const [y, m, d] = s.split("-").map(Number); return new Date(y, m - 1, d); };
+  const fmtDate = s => parseD(s).toLocaleDateString("sv-SE", { weekday: "long", day: "numeric", month: "long" });
 
   // ---------- Statistik ----------
   function quizStats(topic) {
@@ -1744,58 +1827,80 @@ const App = (() => {
       .sort((a, b) => b.p - a.p);
   }
 
-  // ---------- Router ----------
-  const NAV = [
-    ["oversikt", "◎", "Översikt"], ["schema", "▦", "Pluggschema"], ["teori", "❡", "Läs på"], ["formler", "∑", "Formelblad"],
-    ["quiz", "?", "Quiz"], ["tenta", "✎", "Tentafrågor"], ["mock", "⏱", "Provtenta"], ["rakna", "#", "Räkneträning"],
-    ["sim", "∿", "Simulatorer"], ["flash", "▢", "Flashcards"], ["strategi", "★", "Tentastrategi"],
+  // ---------- Navigation ----------
+  const ICON = {
+    idag: '<rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/>',
+    las: '<path d="M3.5 5h6a2.5 2.5 0 0 1 2.5 2.5V20a2 2 0 0 0-2-2H3.5z"/><path d="M20.5 5h-6A2.5 2.5 0 0 0 12 7.5V20a2 2 0 0 1 2-2h6.5z"/>',
+    ova: '<path d="M4 20l1-4L16.5 4.5l3 3L8 19z"/><path d="M14 7l3 3"/>',
+    prov: '<circle cx="12" cy="13" r="7.5"/><path d="M12 9.5V13l2.5 1.5M9.5 2.5h5"/>',
+    labb: '<path d="M3.5 3.5v17h17"/><path d="M7 16c2.5-6 6-8.5 12-9.5"/>',
+  };
+  const GROUPS = [
+    { id: "idag", name: "Idag", views: [["oversikt", "Översikt"], ["schema", "Pluggschema"]] },
+    { id: "las", name: "Läs", views: [["teori", "Teori"], ["formler", "Formelblad"], ["strategi", "Tentastrategi"]] },
+    { id: "ova", name: "Öva", views: [["quiz", "Quiz"], ["tenta", "Tentafrågor"], ["rakna", "Räkneträning"], ["flash", "Flashcards"]] },
+    { id: "prov", name: "Provtenta", views: [["mock", "Provtenta"]] },
+    { id: "labb", name: "Labb", views: [["sim", "Simulatorer"]] },
   ];
+  const groupOf = v => GROUPS.find(g => g.views.some(x => x[0] === v)) || GROUPS[0];
+
   function parse() {
     const h = location.hash.slice(1) || "oversikt";
     const [path, qs] = h.split("?");
     const [view, sub] = path.split("/");
     const params = Object.fromEntries(new URLSearchParams(qs || ""));
-    return { view, sub, params };
+    return { view: VIEWS[view] ? view : "oversikt", sub, params };
   }
+  function countLabel() { const d = daysLeft(); return d > 1 ? `${d} dagar kvar` : d === 1 ? "Imorgon" : d === 0 ? "Tentadag" : "Tentan är gjord"; }
   function renderNav() {
-    const { view } = parse();
-    const links = NAV.map(([k, i, n]) => `<a href="#${k}" class="${k === view ? "on" : ""}"><span class="ico">${i}</span>${n}</a>`).join("");
-    $("#nav").innerHTML = links; $("#mnav").innerHTML = links;
-    const d = daysLeft();
-    const label = d > 1 ? `${d} dagar kvar` : d === 1 ? "Imorgon!" : d === 0 ? "Idag – lycka till!" : "Tentan är gjord";
-    $("#countdown").innerHTML = `<b>${Math.max(d, 0)}</b><span>${d === 0 ? "Tentadag 🎯" : "dagar till tentan 2 nov"}</span>`;
-    $("#mcount").textContent = label;
+    const { view } = parse(), g = groupOf(view);
+    $("#nav").innerHTML = [
+      ["Idag", GROUPS[0].views], ["Läs", GROUPS[1].views], ["Öva", GROUPS[2].views], ["Testa", [...GROUPS[3].views, ...GROUPS[4].views]],
+    ].map(([lbl, vs]) => `<div class="navgroup"><span>${lbl}</span>${vs.map(([k, n]) => `<a href="#${k}" class="${k === view ? "on" : ""}">${n}</a>`).join("")}</div>`).join("");
+    $("#tabbar").innerHTML = GROUPS.map(x => `<a href="#${x.views[0][0]}" class="${x.id === g.id ? "on" : ""}"><svg viewBox="0 0 24 24">${ICON[x.id]}</svg>${x.name === "Provtenta" ? "Prov" : x.name}</a>`).join("");
+    $("#countdown").innerHTML = `<span class="hl"><b>${countLabel()}</b></span>`;
+  }
+  function chrome(view) {
+    const g = groupOf(view);
+    const top = `<div class="mtop"><b>EC2211 Plugg</b><span class="row" style="gap:6px"><span class="small"><span class="hl">${countLabel()}</span></span><button class="btn sm ghost themebtn" aria-label="Byt tema"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16z" fill="currentColor"/></svg></button></span></div>`;
+    const tabs = g.views.length > 1 ? `<div class="subtabs mobile">${g.views.map(([k, n]) => `<a href="#${k}" class="${k === view ? "on" : ""}">${n}</a>`).join("")}</div>` : "";
+    return top + tabs;
   }
   let mockTick = null;
   function route() {
     clearInterval(mockTick);
+    document.onkeydown = null;
     const r = parse();
     renderNav();
-    const v = VIEWS[r.view] || VIEWS.oversikt;
     const main = $("#main");
-    main.innerHTML = "";
-    v(main, r);
-    math(main);
+    main.innerHTML = chrome(r.view) + '<div id="view"></div>';
+    bindTheme();
+    const v = $("#view");
+    VIEWS[r.view](v, r);
+    math(v);
     window.scrollTo(0, 0);
   }
 
   // ---------- Hjälpare ----------
-  function chipsHTML(sel, all = true) {
+  function filterHTML(sel) {
     const set = new Set(sel);
-    return `<div class="chips">${all ? `<button class="chip ${set.size ? "" : "on"}" data-t="">Alla</button>` : ""}${TOPICS.map(t => `<button class="chip ${set.has(t.id) ? "on" : ""}" data-t="${t.id}" title="${t.en}">${t.ln} ${t.name}</button>`).join("")}</div>`;
+    return `<div class="filter" role="group" aria-label="Filtrera ämne"><button class="chip ${set.size ? "" : "on"}" data-t="">Alla ämnen</button>${TOPICS.map(t => `<button class="chip ${set.has(t.id) ? "on" : ""}" data-t="${t.id}" title="${t.ln} · ${t.name}">${t.short}</button>`).join("")}</div>`;
   }
-  function bindChips(root, sel, onChange) {
-    $$(".chips .chip[data-t]", root).forEach(b => b.onclick = () => {
+  function bindFilter(root, sel, onChange) {
+    $$(".filter .chip[data-t]", root).forEach(b => b.onclick = () => {
       const t = b.dataset.t; let s = new Set(sel);
       if (!t) s.clear(); else s.has(t) ? s.delete(t) : s.add(t);
       onChange([...s]);
     });
   }
+  const head = (title, sub) => `<div class="page-head"><h1>${title}</h1>${sub ? `<p>${sub}</p>` : ""}</div>`;
   const confDot = t => `<span class="dot ${S.conf[t] ? "c" + S.conf[t] : ""}" title="Självskattning"></span>`;
-  const heatColor = v => { if (!v) return "transparent"; const a = Math.min(1, v / 30); return `color-mix(in srgb, var(--accent) ${Math.round(15 + a * 70)}%, transparent)`; };
-  const srcTag = q => q.src.startsWith("Prognos") ? `<span class="tag prog">Prognos 2026</span>` :
-    q.src.startsWith("PS") ? `<span class="tag">Problem set</span>` :
-    /(241029|241206|251030|251204)/.test(q.src) ? `<span class="tag flod">Flodén-tenta</span>` : `<span class="tag">Tidigare tenta</span>`;
+  const heatColor = v => !v ? "transparent" : `color-mix(in srgb, var(--pen) ${Math.round(12 + Math.min(1, v / 30) * 68)}%, transparent)`;
+  const heatText = v => v >= 18 ? "var(--pen-ink)" : "var(--ink)";
+  const isFloden = q => /(241029|241206|251030|251204)/.test(q.src);
+  const srcBadge = q => q.src.startsWith("Prognos") ? `<span class="badge prog">Prognos</span>` : isFloden(q) ? `<span class="badge flod">Flodén</span>` : q.src.startsWith("PS") ? `<span class="badge">Problem set</span>` : `<span class="badge">Sigurdsson</span>`;
+  const taskHTML = (date, t, i) => { const k = date + "#" + i; return `<li class="task ${S.tasks[k] ? "done" : ""}"><input type="checkbox" data-k="${k}" ${S.tasks[k] ? "checked" : ""} aria-label="Klar"><a href="${t[1]}">${esc(t[0])}</a></li>`; };
+  const bindTasks = root => $$(".task input", root).forEach(c => c.onchange = () => { S.tasks[c.dataset.k] = c.checked; save(); c.closest(".task").classList.toggle("done", c.checked); });
 
   // ================== VYER ==================
   const VIEWS = {};
@@ -1804,106 +1909,104 @@ const App = (() => {
   VIEWS.oversikt = (m) => {
     const totalTasks = SCHEDULE.reduce((s, d) => s + d.tasks.length, 0);
     const doneTasks = Object.values(S.tasks).filter(Boolean).length;
-    const qs = quizStats(), es = examStats();
-    const learned = Object.values(S.flash).filter(b => b >= 2).length;
     const td = iso(today());
     const day = SCHEDULE.find(d => d.date === td) || SCHEDULE.find(d => d.date > td) || SCHEDULE[SCHEDULE.length - 1];
-    const pr = priorities();
+    const pr = priorities().slice(0, 4);
     const qp = S.quizPts;
-    const need = g => qp === null || qp === "" ? null : Math.max(0, g - +qp);
-    const d = daysLeft();
+    const d = Math.max(daysLeft(), 0);
+    const qs = quizStats(), es = examStats();
     m.innerHTML = `
-      <div class="hero"><div><h1>EC2211 Intermediate Macroeconomics</h1><p>Tenta måndag 2 november · 4 timmar · 100 p + quizpoäng · examinator Martin Flodén</p></div>
-        <a class="btn primary" href="#schema">Dagens plan →</a></div>
-      <div class="grid g4">
-        <div class="card stat"><div class="v">${Math.max(d, 0)}</div><div class="l">dagar kvar</div></div>
-        <div class="card stat"><div class="v">${pct(doneTasks, totalTasks)}%</div><div class="l">av pluggschemat (${doneTasks}/${totalTasks})</div><div class="bar"><i style="width:${pct(doneTasks, totalTasks)}%"></i></div></div>
-        <div class="card stat"><div class="v">${qs.acc === null ? "–" : Math.round(qs.acc * 100) + "%"}</div><div class="l">rätt på quiz (${qs.n} svar)</div></div>
-        <div class="card stat"><div class="v">${es.done}<span class="muted small"> / ${EXAMQ.length}</span></div><div class="l">tentafrågor rättade ${es.max ? `(${pct(es.got, es.max)} % av poängen)` : ""}</div></div>
-      </div>
-      <div class="grid g2">
-        <div class="card">
-          <h3 style="margin-top:0">${day.date === td ? "Idag" : fmtDate(day.date)}: ${esc(day.title)}</h3>
-          ${day.tasks.map((t, i) => { const k = day.date + "#" + i; return `<div class="task ${S.tasks[k] ? "done" : ""}"><input type="checkbox" data-k="${k}" ${S.tasks[k] ? "checked" : ""}><span><a href="${t[1]}">${esc(t[0])}</a></span></div>`; }).join("")}
-        </div>
-        <div class="card">
-          <h3 style="margin-top:0">Prioritera nu</h3>
-          <p class="muted small">Tentavikt hos Flodén × hur osäker du är (självskattning, quiz och rättade tentafrågor). Uppdateras när du pluggar.</p>
-          ${pr.slice(0, 4).map(x => `<div class="row spread" style="padding:6px 0;border-bottom:1px solid var(--line)"><a href="#teori/${x.t.id}">${confDot(x.t.id)} ${x.t.ln} ${x.t.name}</a><span class="small muted">${x.r === null ? "ej testat" : "beredskap " + Math.round(x.r * 100) + "%"}</span></div>`).join("")}
+      <div class="hero">
+        <div class="hero-grid">
+          <div class="days" aria-label="${d} dagar kvar">${d}</div>
+          <div>
+            <h1>${d === 1 ? "dag" : "dagar"} kvar till tentan</h1>
+            <p>Måndag 2 november. Fyra timmar, 100 poäng plus dina quizpoäng.</p>
+            <div class="bar" title="Pluggschemat"><i style="width:${pct(doneTasks, totalTasks)}%"></i></div>
+            <div class="meta" style="margin-top:6px">${doneTasks} av ${totalTasks} uppgifter i schemat klara</div>
+          </div>
         </div>
       </div>
-      <div class="card">
-        <h3 style="margin-top:0">Vad krävs för betyget?</h3>
-        <div class="row"><label>Mina quizpoäng (0–10): <input type="number" id="qp" min="0" max="10" step="0.5" value="${qp ?? ""}" style="width:90px"></label>
-        <span class="muted small">Gränser på totalen (max 110): A 90 · B 75 · C 60 · D 50 · E 45</span></div>
-        ${qp === null || qp === "" ? "" : `<div class="grid g4" style="margin-top:12px">${[["A", 90], ["B", 75], ["C", 60], ["E", 45]].map(([g, v]) => `<div class="card stat" style="margin:0"><div class="v">${need(v)}</div><div class="l">tentapoäng för ${g}</div></div>`).join("")}</div>`}
+      <div class="two">
+        <section>
+          <h2 style="margin-top:0">${day.date === td ? "Idag" : fmtDate(day.date)}</h2>
+          <p class="muted" style="margin-top:-4px">${esc(day.title)}</p>
+          <ul class="tasks">${day.tasks.map((t, i) => taskHTML(day.date, t, i)).join("")}</ul>
+          <p><a href="#schema">Hela schemat</a></p>
+        </section>
+        <section>
+          <h2 style="margin-top:0">Fokusera på</h2>
+          <p class="muted small" style="margin-top:-4px">Det som brukar ge mest poäng och där du är minst säker.</p>
+          <ul class="focus-list">${pr.map(x => `<li><a href="#teori/${x.t.id}">${x.t.name}</a><span class="meta">${x.r === null ? "ej testat" : Math.round(x.r * 100) + " % klart"}</span></li>`).join("")}</ul>
+        </section>
       </div>
-      <div class="card">
-        <h3 style="margin-top:0">Beredskap per ämne</h3>
-        <div class="scrollx"><table class="tbl"><tr><th>Ämne</th><th>Själv</th><th>Quiz</th><th>Tentafrågor</th><th>Snittpoäng hos Flodén</th></tr>
-        ${TOPICS.map(t => { const q = quizStats(t.id), e = examStats(t.id); return `<tr><td><a href="#teori/${t.id}">${t.ln} ${t.name}</a></td><td>${confDot(t.id)}</td><td>${q.acc === null ? "–" : Math.round(q.acc * 100) + "% (" + q.n + ")"}</td><td>${e.acc === null ? "–" : Math.round(e.acc * 100) + "% (" + e.done + ")"}</td><td>${flodenWeight(t.id).toFixed(1)} p</td></tr>`; }).join("")}
+      <section class="section">
+        <h2>Vad krävs för betyget?</h2>
+        <label class="row">Mina quizpoäng (0–10) <input type="number" id="qp" min="0" max="10" step="0.5" value="${qp ?? ""}" style="width:90px"></label>
+        ${qp === null || qp === "" ? `<p class="muted small">Fyll i dina poäng från kursens quiz så räknar sidan ut hur mycket du behöver på tentan.</p>` :
+          `<div class="grade-row">${[["A", 90], ["B", 75], ["C", 60], ["E", 45]].map(([g, v]) => `<div><b>${Math.max(0, v - +qp)}</b>poäng för ${g}</div>`).join("")}</div>`}
+      </section>
+      <details class="more">
+        <summary>Statistik och tentaarkiv</summary>
+        <div class="row" style="gap:30px;margin-bottom:10px">
+          <div><b>${qs.acc === null ? "–" : Math.round(qs.acc * 100) + " %"}</b> <span class="muted small">rätt på quiz (${qs.n} svar)</span></div>
+          <div><b>${es.done} / ${EXAMQ.length}</b> <span class="muted small">tentafrågor rättade</span></div>
+        </div>
+        <div class="scrollx"><table class="tbl"><tr><th>Ämne</th><th>Själv</th><th>Quiz</th><th>Tentafrågor</th><th>Poäng per Flodén-tenta</th></tr>
+        ${TOPICS.map(t => { const q = quizStats(t.id), e = examStats(t.id); return `<tr><td><a href="#teori/${t.id}">${t.name}</a></td><td>${confDot(t.id)}</td><td>${q.acc === null ? "–" : Math.round(q.acc * 100) + " %"}</td><td>${e.acc === null ? "–" : Math.round(e.acc * 100) + " %"}</td><td>${flodenWeight(t.id).toFixed(1)}</td></tr>`; }).join("")}
         </table></div>
-      </div>
-      <div class="card">
-        <h3 style="margin-top:0">Tentaarkivet: poäng per ämne och tenta</h3>
-        <p class="muted small">Markerade kolumner = Flodén (årets examinator). Ungefärlig poängfördelning per deluppgift. Mörkare = fler poäng.</p>
-        <div class="scrollx"><table class="heat"><tr><th></th>${EXAMS.map(e => `<th class="${e.examiner === "Flodén" ? "flodcol" : ""}">${e.label}<br><span style="font-weight:400">${e.examiner === "Flodén" ? "Flodén" : "Sig."}</span></th>`).join("")}</tr>
-        ${TOPICS.map(t => `<tr><th class="tn">${t.ln} ${t.name}</th>${EXAMS.map(e => `<td style="background:${heatColor(HEAT[t.id][e.id])}">${HEAT[t.id][e.id] || ""}</td>`).join("")}</tr>`).join("")}</table></div>
-        <p class="small">Mönster hos Flodén: <b>Solow 20–25 p på varje tenta</b>, AS–AD/IS–MP 20–25 p varje gång, en essä (tillväxtmodeller, skuld↔prisstabilitet, Great Inflation), Fisher+Taylorprincipen 3/4, arbetsutbud 3/4, tillväxtbokföring 3/4. LN1 och LN11 är nya 2026 – därav "Prognos"-frågorna.</p>
-      </div>
-      <div class="card noprint">
-        <h3 style="margin-top:0">Din data</h3>
-        <p class="muted small">Allt sparas lokalt i den här webbläsaren. Exportera för att flytta mellan dator och mobil.</p>
-        <div class="row"><button class="btn" id="exp">Exportera framsteg</button><label class="btn">Importera<input type="file" id="imp" accept=".json" hidden></label><button class="btn ghost" id="rst">Nollställ allt</button></div>
-      </div>`;
-    $$(".task input", m).forEach(c => c.onchange = () => { S.tasks[c.dataset.k] = c.checked; save(); route(); });
+        <h3>Poäng per ämne på de gamla tentorna</h3>
+        <p class="muted small">Blå kolumnrubriker är Flodéns tentor – han skriver även årets. Mörkare ruta betyder fler poäng.</p>
+        <div class="scrollx"><table class="heat"><tr><th></th>${EXAMS.map(e => `<th class="${e.examiner === "Flodén" ? "fl" : ""}">${e.label}</th>`).join("")}</tr>
+        ${TOPICS.map(t => `<tr><th class="tn">${t.short}</th>${EXAMS.map(e => `<td style="background:${heatColor(HEAT[t.id][e.id])};color:${heatText(HEAT[t.id][e.id])}">${HEAT[t.id][e.id] || ""}</td>`).join("")}</tr>`).join("")}</table></div>
+        <h3>Spara dina framsteg</h3>
+        <p class="muted small">Allt sparas i den här webbläsaren. Exportera för att flytta till en annan enhet.</p>
+        <div class="row" style="margin-bottom:20px"><button class="btn sm" id="exp">Exportera</button><label class="btn sm">Importera<input type="file" id="imp" accept=".json" hidden></label><button class="btn sm ghost" id="rst">Nollställ allt</button></div>
+      </details>`;
+    bindTasks(m);
     $("#qp", m).onchange = e => { S.quizPts = e.target.value === "" ? null : Math.min(10, Math.max(0, +e.target.value)); save(); route(); };
     $("#exp", m).onclick = () => { const b = new Blob([JSON.stringify(S, null, 1)], { type: "application/json" }); const a = document.createElement("a"); a.href = URL.createObjectURL(b); a.download = `ec2211-framsteg-${iso(today())}.json`; a.click(); };
-    $("#imp", m).onchange = e => { const f = e.target.files[0]; if (!f) return; f.text().then(t => { try { S = Object.assign(blank(), JSON.parse(t)); save(); toast("Importerat!"); route(); } catch (err) { toast("Kunde inte läsa filen"); } }); };
-    $("#rst", m).onclick = () => { if (confirm("Radera alla framsteg?")) { S = blank(); save(); route(); } };
+    $("#imp", m).onchange = e => { const f = e.target.files[0]; if (!f) return; f.text().then(t => { try { S = Object.assign(blank(), JSON.parse(t)); save(); toast("Framsteg importerade"); route(); } catch (err) { toast("Filen gick inte att läsa – välj en exporterad .json-fil"); } }); };
+    $("#rst", m).onclick = () => { if (confirm("Radera alla framsteg i den här webbläsaren?")) { S = blank(); save(); route(); } };
   };
 
   // ---------- Schema ----------
   VIEWS.schema = (m) => {
     const td = iso(today());
-    m.innerHTML = `<div class="hero"><div><h1>Pluggschema</h1><p>23 okt → 2 nov. Bocka av – framstegen syns i Översikt. Varje uppgift länkar dit du ska.</p></div></div>` +
-      SCHEDULE.map(d => `<div class="day ${d.date === td ? "today" : d.date < td ? "past" : ""}">
-        <div class="row spread"><h3>${fmtDate(d.date)}${d.date === td ? ' <span class="tag prog">idag</span>' : ""}</h3><span class="small muted">${d.tasks.filter((t, i) => S.tasks[d.date + "#" + i]).length}/${d.tasks.length}</span></div>
-        <div class="muted" style="margin-bottom:4px">${esc(d.title)}</div>
-        ${d.tasks.map((t, i) => { const k = d.date + "#" + i; return `<div class="task ${S.tasks[k] ? "done" : ""}"><input type="checkbox" data-k="${k}" ${S.tasks[k] ? "checked" : ""}><span><a href="${t[1]}">${esc(t[0])}</a></span></div>`; }).join("")}
-      </div>`).join("") +
-      `<div class="card tip"><b>Smart upplägg:</b> varje dag börjar med teori, följs av aktiv återkallning (skriv svar för hand utan att titta) och slutar med quiz. Att skriva för hand tränar exakt det du gör på tentan.</div>`;
-    $$(".task input", m).forEach(c => c.onchange = () => { S.tasks[c.dataset.k] = c.checked; save(); c.closest(".task").classList.toggle("done", c.checked); });
+    m.innerHTML = head("Pluggschema", "Tio dagar fram till tentan. Varje uppgift länkar dit du ska.") +
+      SCHEDULE.map(d => { const dt = parseD(d.date); const done = d.tasks.filter((t, i) => S.tasks[d.date + "#" + i]).length;
+        return `<div class="day ${d.date === td ? "today" : d.date < td ? "past" : ""}">
+          <div class="when"><b>${dt.getDate()}/${dt.getMonth() + 1}</b>${dt.toLocaleDateString("sv-SE", { weekday: "long" })}<div class="meta">${done} av ${d.tasks.length}</div></div>
+          <div><h3>${esc(d.title)}</h3><ul class="tasks">${d.tasks.map((t, i) => taskHTML(d.date, t, i)).join("")}</ul></div></div>`; }).join("") +
+      `<p class="tip">Varje dag: teori först, sedan skriver du svar för hand utan att titta, och sist ett quiz. Att skriva för hand tränar det du gör på tentan.</p>`;
+    bindTasks(m);
   };
 
   // ---------- Teori ----------
   VIEWS.teori = (m, r) => {
     if (r.sub && THEORY[r.sub]) return theoryTopic(m, r.sub);
-    m.innerHTML = `<div class="hero"><div><h1>Läs på</h1><p>Sammanfattningar per föreläsning. Förklaringar på svenska, nyckeltermer på engelska – skriv tentan på engelska.</p></div></div>
-      <div class="topic-list">${TOPICS.map(t => `<a href="#teori/${t.id}"><span>${confDot(t.id)} <b>${t.ln}</b> · ${t.name}<br><span class="small muted">${THEORY[t.id].oneLiner}</span></span><span class="small muted" style="white-space:nowrap">${flodenWeight(t.id).toFixed(0)} p/tenta</span></a>`).join("")}</div>`;
+    m.innerHTML = head("Teori", "Sammanfattningar av alla föreläsningar. Förklaringarna är på svenska, nyckeltermerna på engelska – tentan skrivs på engelska.") +
+      `<ul class="topics">${TOPICS.map(t => `<li><a href="#teori/${t.id}"><span class="ln">${t.ln}</span><span><span class="tn">${t.name}</span><span class="tl">${THEORY[t.id].oneLiner}</span></span><span>${confDot(t.id)}</span></a></li>`).join("")}</ul>`;
   };
   function theoryTopic(m, id) {
     const t = TOPICS.find(x => x.id === id), th = THEORY[id];
     const idx = TOPICS.findIndex(x => x.id === id), prev = TOPICS[idx - 1], next = TOPICS[idx + 1];
     const fs = FORMULAS.filter(f => f.t === id), eq = EXAMQ.filter(q => q.t === id);
     m.innerHTML = `
-      <a href="#teori" class="small">← Alla ämnen</a>
-      <div class="hero"><div><h1>${t.name}</h1><p>${t.ln} · ${t.en}</p></div>
-        <div><div class="small muted" style="margin-bottom:4px">Hur sitter det?</div><div class="conf">${[[1, "Osäker"], [2, "Okej"], [3, "Sitter"]].map(([v, l]) => `<button data-v="${v}" class="${S.conf[id] === v ? "on" : ""}">${l}</button>`).join("")}</div></div></div>
-      <div class="card tip"><b>Kärnan:</b> ${th.oneLiner}</div>
-      <div class="card">${th.sections.map((s, i) => `<details class="theory-sec" ${i < 2 ? "open" : ""}><summary><span>${s.h}</span></summary><div>${s.body}</div></details>`).join("")}</div>
-      <div class="card warn"><b>Vanliga fel på tentan</b><ul class="pitfalls">${th.pitfalls.map(p => `<li>${p}</li>`).join("")}</ul></div>
-      <div class="grid g2">
-        <div class="card"><h3 style="margin-top:0">Formler (${fs.length})</h3>${fs.slice(0, 8).map(f => `<div class="small"><b>${f.name}</b>${tex(f.tex)}</div>`).join("")}<a href="#formler?t=${id}">Alla formler för ämnet →</a></div>
-        <div class="card"><h3 style="margin-top:0">Öva direkt</h3>
-          <p><a class="btn primary" href="#quiz?t=${id}">Quiz: ${t.name}</a></p>
-          <p><a class="btn" href="#tenta?t=${id}">Tentafrågor (${eq.length})</a></p>
-          <p><a class="btn" href="#flash?t=${id}">Flashcards</a></p>
-          ${id === "t3" ? `<p><a class="btn warm" href="#sim/solow">Solow-simulatorn</a></p>` : ""}
-          ${["t7", "t8"].includes(id) ? `<p><a class="btn warm" href="#sim/asad">AS–AD-simulatorn</a></p>` : ""}
-        </div>
-      </div>
-      <div class="row spread">${prev ? `<a class="btn" href="#teori/${prev.id}">← ${prev.name}</a>` : "<span></span>"}${next ? `<a class="btn" href="#teori/${next.id}">${next.name} →</a>` : ""}</div>`;
+      <p class="small"><a href="#teori">Alla ämnen</a></p>
+      <div class="page-head"><div class="meta">${t.ln} · ${t.en}</div><h1>${t.name}</h1></div>
+      <div class="read">
+        <p class="lead">${th.oneLiner}</p>
+        ${th.sections.map((s, i) => `<details class="sec" ${i === 0 ? "open" : ""}><summary><span>${s.h}</span></summary><div>${s.body}</div></details>`).join("")}
+        <div class="warn"><b>Vanliga fel</b><ul>${th.pitfalls.map(p => `<li>${p}</li>`).join("")}</ul></div>
+        <div class="section"><h2>Hur sitter det?</h2>
+          <div class="conf">${[[1, "Osäker"], [2, "Okej"], [3, "Sitter"]].map(([v, l]) => `<button data-v="${v}" class="${S.conf[id] === v ? "on" : ""}">${l}</button>`).join("")}</div>
+          <p class="muted small">Din bedömning styr listan "Fokusera på" under Idag.</p></div>
+        <div class="section"><h2>Öva på ${t.name.toLowerCase()}</h2>
+          <div class="row"><a class="btn primary" href="#quiz?t=${id}">Starta quiz</a><a class="btn" href="#tenta?t=${id}">${eq.length} tentafrågor</a><a class="btn" href="#formler?t=${id}">${fs.length} formler</a>
+          ${id === "t3" ? `<a class="btn" href="#sim/solow">Solow-simulatorn</a>` : ""}${["t7", "t8"].includes(id) ? `<a class="btn" href="#sim/asad">AS–AD-simulatorn</a>` : ""}</div></div>
+        <div class="row spread section">${prev ? `<a href="#teori/${prev.id}">← ${prev.name}</a>` : "<span></span>"}${next ? `<a href="#teori/${next.id}">${next.name} →</a>` : ""}</div>
+      </div>`;
     $$(".conf button", m).forEach(b => b.onclick = () => { S.conf[id] = +b.dataset.v; save(); $$(".conf button", m).forEach(x => x.classList.toggle("on", x === b)); toast("Sparat"); });
   }
 
@@ -1911,20 +2014,20 @@ const App = (() => {
   let fState = { q: "", hide: false };
   VIEWS.formler = (m, r) => {
     const sel = r.params.t ? r.params.t.split(",") : [];
-    m.innerHTML = `<div class="hero"><div><h1>Formelblad</h1><p>${FORMULAS.length} formler. Självtest: dölj formlerna och klicka för att visa en i taget.</p></div>
-      <div class="row noprint"><button class="btn ${fState.hide ? "primary" : ""}" id="hide">${fState.hide ? "Visa alla" : "Självtest-läge"}</button><button class="btn" onclick="print()">Skriv ut</button></div></div>
-      <input type="search" id="fq" placeholder="Sök formel, t.ex. Euler, Solow, UIP…" value="${esc(fState.q)}" style="width:100%;margin-bottom:6px">
-      ${chipsHTML(sel)}<div id="flist"></div>`;
+    m.innerHTML = head("Formelblad", `${FORMULAS.length} formler. Testa dig själv genom att dölja dem och klicka fram en i taget.`) +
+      `<div class="row noprint" style="margin-bottom:14px"><input type="search" id="fq" placeholder="Sök, t.ex. Euler eller UIP" value="${esc(fState.q)}" style="flex:1;min-width:200px">
+       <button class="btn ${fState.hide ? "primary" : ""}" id="hide">${fState.hide ? "Visa alla" : "Dölj formlerna"}</button><button class="btn ghost" onclick="print()">Skriv ut</button></div>
+      ${filterHTML(sel)}<div id="flist"></div>`;
     const draw = () => {
       const q = fState.q.toLowerCase();
       const list = FORMULAS.filter(f => (!sel.length || sel.includes(f.t)) && (!q || (f.name + " " + f.when + " " + f.tex + " " + topicName(f.t)).toLowerCase().includes(q)));
-      $("#flist", m).innerHTML = TOPICS.filter(t => list.some(f => f.t === t.id)).map(t => `<h3>${t.ln} ${t.name}</h3><div class="fgrid">${list.filter(f => f.t === t.id).map(f => `<div class="fcard ${fState.hide ? "hidden" : ""}"><div class="fn">${esc(f.name)}</div><div class="ftex">${tex(f.tex)}</div><div class="fw">${f.when}</div></div>`).join("")}</div>`).join("") || `<p class="muted">Inga träffar.</p>`;
+      $("#flist", m).innerHTML = TOPICS.filter(t => list.some(f => f.t === t.id)).map(t => `<div class="fgroup">${t.name}</div><div class="fgrid">${list.filter(f => f.t === t.id).map(f => `<div class="fcard ${fState.hide ? "hidden" : ""}"><div class="fn">${esc(f.name)}</div><div class="ftex">${tex(f.tex)}</div>${f.when ? `<div class="fw">${f.when}</div>` : ""}</div>`).join("")}</div>`).join("") || `<p class="muted">Inga formler matchar sökningen.</p>`;
       $$(".fcard.hidden .ftex", m).forEach(e => e.onclick = () => e.parentElement.classList.remove("hidden"));
       math($("#flist", m));
     };
     $("#fq", m).oninput = e => { fState.q = e.target.value; draw(); };
     $("#hide", m).onclick = () => { fState.hide = !fState.hide; route(); };
-    bindChips(m, sel, s => location.hash = "formler" + (s.length ? "?t=" + s.join(",") : ""));
+    bindFilter(m, sel, s => location.hash = "formler" + (s.length ? "?t=" + s.join(",") : ""));
     draw();
   };
 
@@ -1936,19 +2039,15 @@ const App = (() => {
     if (quizSession && quizSession.key === location.hash) return quizRun(m);
     const pool = QUIZ.map((q, i) => ({ ...q, i })).filter(q => !sel.length || sel.includes(q.t));
     const wrongPool = pool.filter(q => { const s = S.quiz["q" + q.i]; return s && s.last === false; });
-    m.innerHTML = `<div class="hero"><div><h1>Quiz</h1><p>${QUIZ.length} flervalsfrågor i stil med kursens quiz. Frågor på engelska, förklaringar på svenska.</p></div></div>
-      ${chipsHTML(sel)}
-      <div class="card">
-        <div class="row"><label>Läge: <select id="mode">
-          <option value="smart" ${mode === "smart" ? "selected" : ""}>Smart (ej sedda + fel först)</option>
-          <option value="random" ${mode === "random" ? "selected" : ""}>Slumpat</option>
-          <option value="wrong" ${mode === "wrong" ? "selected" : ""}>Repetera mina fel (${wrongPool.length})</option></select></label>
-          <label>Antal: <select id="cnt"><option>5</option><option selected>10</option><option>20</option><option value="999">Alla</option></select></label>
-          <button class="btn primary" id="go">Starta</button></div>
-        <p class="muted small" style="margin-bottom:0">${pool.length} frågor i urvalet. Tangentbord: 1–4 svarar, Enter = nästa.</p>
-      </div>
-      <div class="card"><h3 style="margin-top:0">Din träffsäkerhet</h3>${TOPICS.map(t => { const s = quizStats(t.id); return `<div class="row spread small" style="padding:4px 0"><span>${t.ln} ${t.name}</span><span style="width:45%"><div class="bar"><i style="width:${s.acc === null ? 0 : Math.round(s.acc * 100)}%"></i></div></span><span class="muted" style="width:70px;text-align:right">${s.acc === null ? "–" : Math.round(s.acc * 100) + "%"}</span></div>`; }).join("")}</div>`;
-    bindChips(m, sel, s => location.hash = "quiz" + (s.length ? "?t=" + s.join(",") : ""));
+    m.innerHTML = head("Quiz", "Flervalsfrågor i samma stil som kursens quiz. Frågorna är på engelska, förklaringarna på svenska.") +
+      `${filterHTML(sel)}
+      <div class="row" style="margin-bottom:8px">
+        <select id="mode" aria-label="Läge"><option value="smart" ${mode === "smart" ? "selected" : ""}>Nya och felsvarade först</option><option value="random" ${mode === "random" ? "selected" : ""}>Slumpad ordning</option><option value="wrong" ${mode === "wrong" ? "selected" : ""}>Bara mina fel (${wrongPool.length})</option></select>
+        <select id="cnt" aria-label="Antal"><option value="5">5 frågor</option><option value="10" selected>10 frågor</option><option value="20">20 frågor</option><option value="999">Alla</option></select>
+        <button class="btn primary" id="go">Starta quiz</button></div>
+      <p class="meta">${pool.length} frågor valda. Svara med 1–4, nästa fråga med Enter.</p>
+      <div class="section"><h2>Träffsäkerhet</h2>${TOPICS.map(t => { const s = quizStats(t.id); return `<div class="acc-row"><span>${t.short}</span><div class="bar"><i style="width:${s.acc === null ? 0 : Math.round(s.acc * 100)}%"></i></div><span class="meta" style="text-align:right">${s.acc === null ? "–" : Math.round(s.acc * 100) + " %"}</span></div>`; }).join("")}</div>`;
+    bindFilter(m, sel, s => location.hash = "quiz" + (s.length ? "?t=" + s.join(",") : ""));
     $("#go", m).onclick = () => {
       const md = $("#mode", m).value, n = +$("#cnt", m).value;
       let qs;
@@ -1956,7 +2055,7 @@ const App = (() => {
       else if (md === "random") qs = shuffle(pool);
       else { const sc = q => { const s = S.quiz["q" + q.i]; return !s ? 0 : s.last === false ? 1 : 2 + Math.random(); }; qs = shuffle(pool).sort((a, b) => sc(a) - sc(b)); }
       qs = qs.slice(0, n);
-      if (!qs.length) return toast("Inga frågor i urvalet");
+      if (!qs.length) return toast("Inga frågor att visa – välj fler ämnen");
       quizSession = { key: location.hash, qs: qs.map(q => ({ ...q, order: shuffle(q.o.map((o, j) => j)) })), pos: 0, right: 0, answered: false };
       quizRun(m);
     };
@@ -1964,24 +2063,24 @@ const App = (() => {
   function quizRun(m) {
     const s = quizSession;
     if (s.pos >= s.qs.length) {
-      m.innerHTML = `<div class="card" style="text-align:center;padding:40px"><h2>${s.right} / ${s.qs.length} rätt</h2><p class="muted">${s.right === s.qs.length ? "Perfekt!" : s.right / s.qs.length >= 0.8 ? "Starkt – kör 'Repetera mina fel' för resten." : "Läs förklaringarna och teorin för ämnena du missade."}</p>
-        <div class="row" style="justify-content:center"><button class="btn primary" id="again">Ny omgång</button><a class="btn" href="#quiz?mode=wrong">Repetera fel</a></div></div>`;
+      m.innerHTML = `<div class="qcard" style="padding:30px 0"><div class="days" style="font-size:5rem">${s.right}/${s.qs.length}</div><h2>${s.right === s.qs.length ? "Alla rätt." : s.right / s.qs.length >= 0.8 ? "Starkt. Kör dina fel en gång till." : "Läs förklaringarna och teorin för det du missade."}</h2>
+        <div class="row"><button class="btn primary" id="again">Nytt quiz</button><a class="btn" href="#quiz?mode=wrong">Öva på mina fel</a></div></div>`;
       $("#again", m).onclick = () => { quizSession = null; route(); };
       return;
     }
     const q = s.qs[s.pos];
-    m.innerHTML = `<div class="row spread"><span class="muted small">Fråga ${s.pos + 1} av ${s.qs.length} · ${topicName(q.t)}</span><button class="btn sm ghost" id="quit">Avsluta</button></div>
-      <div class="bar" style="margin:8px 0 16px"><i style="width:${pct(s.pos, s.qs.length)}%"></i></div>
-      <div class="card"><h3 style="margin-top:0;font-family:var(--sans);font-weight:600">${q.q}</h3>
-        <div id="opts">${q.order.map((j, k) => `<button class="opt" data-j="${j}"><b>${k + 1}.</b> ${q.o[j]}</button>`).join("")}</div>
-        <div id="ex"></div></div>`;
+    m.innerHTML = `<div class="qcard"><div class="row spread"><span class="meta">Fråga ${s.pos + 1} av ${s.qs.length} · ${topicName(q.t)}</span><button class="btn sm ghost" id="quit">Avsluta</button></div>
+      <div class="bar" style="margin:10px 0 24px"><i style="width:${pct(s.pos, s.qs.length)}%"></i></div>
+      <div class="qtext">${q.q}</div>
+      <div id="opts">${q.order.map((j, k) => `<button class="opt" data-j="${j}"><span class="k">${k + 1}</span><span>${q.o[j]}</span></button>`).join("")}</div>
+      <div id="ex"></div></div>`;
     math(m);
     const answer = j => {
       if (s.answered) return; s.answered = true;
       const ok = j === q.a; if (ok) s.right++;
       const st = S.quiz["q" + q.i] || { n: 0, c: 0 }; st.n++; if (ok) st.c++; st.last = ok; S.quiz["q" + q.i] = st; save();
       $$(".opt", m).forEach(b => { b.disabled = true; const jj = +b.dataset.j; if (jj === q.a) b.classList.add("right"); else if (jj === j) b.classList.add("wrong"); });
-      $("#ex", m).innerHTML = `<div class="expl"><b class="${ok ? "ok" : "no"}">${ok ? "Rätt!" : "Fel."}</b> ${q.e}</div><div class="row" style="margin-top:12px"><button class="btn primary" id="nx">Nästa →</button><a class="small" href="#teori/${q.t}">Läs teorin</a></div>`;
+      $("#ex", m).innerHTML = `<div class="expl"><b class="${ok ? "ok" : "no"}">${ok ? "Rätt." : "Fel."}</b> ${q.e}</div><div class="row" style="margin-top:14px"><button class="btn primary" id="nx">Nästa fråga</button><a class="small" href="#teori/${q.t}">Läs teorin</a></div>`;
       math($("#ex", m));
       $("#nx", m).onclick = next;
     };
@@ -1989,60 +2088,59 @@ const App = (() => {
     $$(".opt", m).forEach(b => b.onclick = () => answer(+b.dataset.j));
     $("#quit", m).onclick = () => { quizSession = null; route(); };
     document.onkeydown = e => {
-      if (!location.hash.startsWith("#quiz") || !quizSession) return;
       if (/^[1-4]$/.test(e.key) && !s.answered) { const b = $$(".opt", m)[+e.key - 1]; if (b) answer(+b.dataset.j); }
       else if (e.key === "Enter" && s.answered) next();
     };
   }
 
   // ---------- Tentafrågor ----------
-  function examCard(q, opts = {}) {
-    const st = S.exam[q.id] || {};
-    const keys = st.keys || [];
-    return `<div class="card examq" data-id="${q.id}">
-      <div class="q-head">${srcTag(q)}<span class="tag pts">${q.pts} p</span><span class="tag">${topicName(q.t)}</span><span class="small muted">${esc(q.src)}</span>${st.graded ? `<span class="tag" style="margin-left:auto">Rättad: ${st.score}/${q.pts}</span>` : ""}</div>
-      <div>${q.q}</div>
-      <details ${opts.open ? "open" : ""} class="ans-area"><summary>Skriv ditt svar ${st.ans ? "(sparat utkast)" : ""}</summary>
-        <textarea placeholder="Skriv på engelska, som på tentan. Sparas automatiskt.">${esc(st.ans || "")}</textarea>
-      </details>
-      <div class="row" style="margin-top:10px">
-        <button class="btn primary sm show">${opts.reveal ? "Dölj" : "Visa"} modellsvar & rättningsmall</button>
-        ${q.sim ? `<a class="btn sm warm" href="#sim/${q.sim.split(":")[0]}?sc=${q.sim.split(":")[1]}">Öppna i simulatorn</a>` : ""}
-      </div>
+  function examBody(q, opts = {}) {
+    const st = S.exam[q.id] || {}, keys = st.keys || [];
+    return `<div class="examq" data-id="${q.id}">
+      <div class="meta" style="margin-bottom:8px">${topicName(q.t)} · ${esc(q.src)}</div>
+      <textarea placeholder="Skriv ditt svar på engelska, som på tentan. Det sparas automatiskt." aria-label="Ditt svar">${esc(st.ans || "")}</textarea>
+      <div class="row" style="margin-top:10px"><button class="btn sm primary show">${opts.reveal ? "Dölj modellsvar" : "Visa modellsvar"}</button>
+        ${q.sim ? `<a class="btn sm" href="#sim/${q.sim.split(":")[0]}?sc=${q.sim.split(":")[1]}">Se det i simulatorn</a>` : ""}</div>
       <div class="reveal" ${opts.reveal ? "" : "hidden"}>
         <div class="model">${q.a}</div>
-        <div class="keys" style="margin-top:12px"><b>Rättningsmall – bocka av det du fick med:</b>
+        <div class="keys"><b>Rätta dig själv – bocka för det du fick med</b>
           ${q.keys.map((k, i) => `<label><input type="checkbox" data-i="${i}" ${keys[i] ? "checked" : ""}><span>${k}</span></label>`).join("")}
-          <div class="row" style="margin-top:6px"><span>Uppskattad poäng: <span class="score">${(q.pts * keys.filter(Boolean).length / q.keys.length).toFixed(1)}</span> / ${q.pts}</span><button class="btn sm save">Spara rättning</button></div>
+          <div class="row" style="margin-top:8px"><span>Ungefär <span class="score">${(q.pts * keys.filter(Boolean).length / q.keys.length).toFixed(1)}</span> av ${q.pts} poäng</span><button class="btn sm save">Spara poängen</button></div>
         </div>
       </div></div>`;
   }
-  function bindExamCards(root) {
+  function examRow(q, opts = {}) {
+    const st = S.exam[q.id] || {};
+    return `<details class="qitem" ${opts.open ? "open" : ""}><summary><span class="pts">${q.pts} p</span><span class="qx">${q.q}</span><span class="row side-meta" style="gap:6px">${st.graded ? `<span class="done-mark">${st.score}/${q.pts}</span>` : ""}${srcBadge(q)}</span></summary>
+      <div class="qbody">${examBody(q, opts)}</div></details>`;
+  }
+  function bindExam(root) {
     $$(".examq", root).forEach(card => {
       const id = card.dataset.id, q = EXAMQ.find(x => x.id === id);
       const st = () => (S.exam[id] = S.exam[id] || {});
       const ta = $("textarea", card);
       ta.oninput = () => { st().ans = ta.value; save(); };
-      $(".show", card).onclick = e => { const rv = $(".reveal", card); rv.hidden = !rv.hidden; e.target.textContent = (rv.hidden ? "Visa" : "Dölj") + " modellsvar & rättningsmall"; if (!rv.hidden) math(rv); };
+      $(".show", card).onclick = e => { const rv = $(".reveal", card); rv.hidden = !rv.hidden; e.target.textContent = rv.hidden ? "Visa modellsvar" : "Dölj modellsvar"; if (!rv.hidden) math(rv); };
       const upd = () => { const ks = $$(".keys input", card).map(c => c.checked); st().keys = ks; save(); $(".score", card).textContent = (q.pts * ks.filter(Boolean).length / q.keys.length).toFixed(1); };
       $$(".keys input", card).forEach(c => c.onchange = upd);
-      $(".save", card).onclick = () => { upd(); const s = st(); s.score = +(q.pts * s.keys.filter(Boolean).length / q.keys.length).toFixed(1); s.graded = true; save(); toast(`Sparat: ${s.score}/${q.pts}`); };
+      $(".save", card).onclick = () => { upd(); const s = st(); s.score = +(q.pts * s.keys.filter(Boolean).length / q.keys.length).toFixed(1); s.graded = true; save(); toast(`Sparat: ${s.score} av ${q.pts} poäng`); };
     });
+    $$("details.qitem", root).forEach(d => d.addEventListener("toggle", () => { if (d.open) math(d); }));
   }
   VIEWS.tenta = (m, r) => {
     const sel = r.params.t ? r.params.t.split(",") : [];
     const src = r.params.src || "";
     const SRC = { "Flodén": /(241029|241206|251030|251204)/, "Sig": /(250319|250509|260320|260508)/, "Prognos": /Prognos/, "PS": /^PS|\(PS/ };
     const list = EXAMQ.filter(q => (!sel.length || sel.includes(q.t)) && (!src || (SRC[src] ? SRC[src].test(q.src) : q.src.includes(src))));
-    const srcs = [["", "Alla källor"], ["Flodén", "Flodén-tentor"], ["Prognos", "Prognos 2026"], ["PS", "Problem sets"], ["Sig", "Sigurdsson-tentor"]];
-    m.innerHTML = `<div class="hero"><div><h1>Tentafrågor</h1><p>${EXAMQ.length} frågor från alla ${EXAMS.length} gamla tentor, problem sets och prognoser för nytt material – med modellsvar på engelska och rättningsmall.</p></div></div>
-      ${chipsHTML(sel)}
-      <div class="chips">${srcs.map(([k, l]) => `<button class="chip src ${src === k ? "on" : ""}" data-s="${k}">${l}</button>`).join("")}</div>
-      <p class="muted small">${list.length} frågor. Tips: skriv först, rätta sedan med mallen. Studentsvaren (A-betyg) i kursmaterialet är handskrivna – modellsvaren här följer samma struktur.</p>
-      <div id="qlist">${list.map(q => examCard(q)).join("")}</div>`;
-    bindChips(m, sel, s => { const p = new URLSearchParams(); if (s.length) p.set("t", s.join(",")); if (src) p.set("src", src); location.hash = "tenta" + (p.toString() ? "?" + p : ""); });
-    $$(".chip.src", m).forEach(b => b.onclick = () => { const p = new URLSearchParams(); if (sel.length) p.set("t", sel.join(",")); if (b.dataset.s) p.set("src", b.dataset.s); location.hash = "tenta" + (p.toString() ? "?" + p : ""); });
-    bindExamCards(m);
+    const srcs = [["", "Alla källor"], ["Flodén", "Flodéns tentor"], ["Prognos", "Prognos för nytt material"], ["PS", "Problem sets"], ["Sig", "Sigurdssons tentor"]];
+    m.innerHTML = head("Tentafrågor", "Frågor från alla gamla tentor och problem set, med modellsvar på engelska. Skriv ditt svar först och rätta dig sedan mot punkterna.") +
+      `${filterHTML(sel)}
+      <div class="row" style="margin:-6px 0 18px"><select id="src" aria-label="Källa">${srcs.map(([k, l]) => `<option value="${k}" ${src === k ? "selected" : ""}>${l}</option>`).join("")}</select><span class="meta">${list.length} frågor</span></div>
+      <div class="qlist">${list.map(q => examRow(q)).join("") || `<p class="muted" style="padding:16px 0">Inga frågor matchar filtret.</p>`}</div>`;
+    const go = (s, sr) => { const p = new URLSearchParams(); if (s.length) p.set("t", s.join(",")); if (sr) p.set("src", sr); location.hash = "tenta" + (p.toString() ? "?" + p : ""); };
+    bindFilter(m, sel, s => go(s, src));
+    $("#src", m).onchange = e => go(sel, e.target.value);
+    bindExam(m);
   };
 
   // ---------- Provtenta ----------
@@ -2051,22 +2149,22 @@ const App = (() => {
     const shorts = []; const used = new Set();
     shuffle(EXAMQ.filter(q => q.pts === 5)).forEach(q => { if (shorts.length < 6 && !used.has(q.t)) { shorts.push(q.id); used.add(q.t); } });
     const solow = pick(EXAMQ.filter(q => q.t === "t3" && q.pts >= 10 && q.id !== "s6"), 1).map(q => q.id);
-    const sr = pick(EXAMQ.filter(q => ["t7", "t8", "t11"].includes(q.t) && q.pts >= 15 && !["p1"].includes(q.id)), 1).map(q => q.id);
+    const sr = pick(EXAMQ.filter(q => ["t7", "t8", "t11"].includes(q.t) && q.pts >= 15 && q.id !== "p1"), 1).map(q => q.id);
     const essay = pick(["m5", "p1", "f6"], 1);
     const ten = pick(EXAMQ.filter(q => q.pts === 10 && !shorts.includes(q.id)), 1).map(q => q.id);
     return { id: "random", name: "Slumpad provtenta", parts: [
       { title: "Question 1: Short questions", ids: shorts }, { title: "Question 2: Growth", ids: ["s1", ...solow] },
       { title: "Question 3: The short run", ids: sr }, { title: "Question 4: Essay", ids: essay }, { title: "Question 5", ids: ten }] };
   }
+  const mockTotal = mk => mk.parts.flatMap(p => p.ids).reduce((s, id) => s + EXAMQ.find(q => q.id === id).pts, 0);
   VIEWS.mock = (m, r) => {
     if (r.sub) return mockRun(m, r.sub);
-    m.innerHTML = `<div class="hero"><div><h1>Provtenta</h1><p>Flodén-format, 4 timmar, inga hjälpmedel. Skriv helst för hand och skriv sedan in nyckelpunkter – eller skriv direkt här.</p></div></div>
-      <div class="grid g2">${MOCKS.map(mk => { const st = S.mock[mk.id] || {}; const tot = mk.parts.flatMap(p => p.ids).reduce((s, id) => s + EXAMQ.find(q => q.id === id).pts, 0);
-        return `<div class="card"><h3 style="margin-top:0">${mk.name}</h3><p class="muted small">${mk.parts.map(p => p.title.replace(/^Question \d: /, "")).join(" · ")}</p><p>${tot} poäng ${st.result != null ? ` · <b>Ditt resultat: ${st.result} p</b>` : ""}</p><a class="btn primary" href="#mock/${mk.id}">${st.start ? "Fortsätt" : "Starta"}</a></div>`; }).join("")}
-        <div class="card"><h3 style="margin-top:0">Slumpad provtenta</h3><p class="muted small">Ny kombination varje gång: 6 kortfrågor från olika ämnen, Solow, kort sikt, essä, 10-poängare.</p><button class="btn warm" id="rnd">Generera</button></div>
-      </div>
-      <div class="card tip"><b>Så gör du:</b> sätt mobilen på flygplansläge, starta timern och följ tidsplanen i <a href="#strategi">Tentastrategi</a>. Rätta direkt efteråt med rättningsmallen – och lägg de missade punkterna i schemat för nästa dag.</div>`;
-    $("#rnd", m).onclick = () => { const mk = randomMock(); S.mock.random = { def: mk }; save(); location.hash = "mock/random"; };
+    m.innerHTML = head("Provtenta", "Samma upplägg som Flodéns tentor: kortfrågor, Solow, kort sikt och en essä. Fyra timmar, inga hjälpmedel.") +
+      `<ul class="mocks">${MOCKS.map(mk => { const st = S.mock[mk.id] || {};
+        return `<li><div><h3>${mk.name}</h3><div class="meta">${mockTotal(mk)} poäng${st.result != null ? ` · ditt resultat ${st.result}` : ""}</div></div><a class="btn ${st.start ? "" : "primary"}" href="#mock/${mk.id}">${st.start ? "Fortsätt" : "Starta"}</a></li>`; }).join("")}
+        <li><div><h3>Slumpad provtenta</h3><div class="meta">Ny kombination av frågor varje gång</div></div><button class="btn" id="rnd">Skapa</button></li></ul>
+      <p class="tip">Sätt telefonen på flygplansläge, starta timern och följ tidsplanen under Tentastrategi. Rätta direkt efteråt och lägg det du missade i morgondagens plugg.</p>`;
+    $("#rnd", m).onclick = () => { S.mock.random = { def: randomMock() }; save(); location.hash = "mock/random"; };
   };
   function mockRun(m, id) {
     const def = id === "random" ? (S.mock.random && S.mock.random.def) : MOCKS.find(x => x.id === id);
@@ -2076,55 +2174,50 @@ const App = (() => {
     const elapsed = () => (st.acc || 0) + (st.runFrom ? (Date.now() - st.runFrom) / 1000 : 0);
     const qsAll = def.parts.flatMap(p => p.ids.map(i => EXAMQ.find(q => q.id === i)));
     const tot = qsAll.reduce((s, q) => s + q.pts, 0);
-    m.innerHTML = `<a href="#mock" class="small">← Provtentor</a>
-      <div class="sticky-timer row spread"><div><div class="timer" id="tm">4:00:00</div><div class="small muted">${def.name} · ${tot} p</div></div>
-        <div class="row"><button class="btn primary" id="tg">${st.runFrom ? "Pausa" : st.acc ? "Fortsätt" : "Starta timer"}</button><button class="btn" id="fin">${st.done ? "Dölj facit" : "Lämna in & rätta"}</button><button class="btn ghost sm" id="rs">Nollställ</button></div></div>
-      <div class="card"><b>Instruktioner (som på riktiga tentan):</b> Answer in English. Explain notions/concepts and symbols. If a question is vaguely formulated, specify the conditions used. Max one page per short question; essay max 3 pages without equations.</div>
-      ${def.parts.map(p => `<h2>${p.title} <span class="tag pts">${p.ids.reduce((s, i) => s + EXAMQ.find(q => q.id === i).pts, 0)} p</span></h2>${p.ids.map(i => examCard(EXAMQ.find(q => q.id === i), { open: true, reveal: !!st.done })).join("")}`).join("")}
-      <div class="card" id="res"></div>`;
-    bindExamCards(m);
-    const showRes = () => {
-      const got = qsAll.reduce((s, q) => s + ((S.exam[q.id] && S.exam[q.id].graded) ? S.exam[q.id].score : 0), 0);
-      const qp = +(S.quizPts || 0); const total = got * 100 / tot + qp;
-      const grade = total >= 90 ? "A" : total >= 75 ? "B" : total >= 60 ? "C" : total >= 50 ? "D" : total >= 45 ? "E" : "F";
-      $("#res", m).innerHTML = st.done ? `<h3 style="margin-top:0">Resultat</h3><p>Rättade poäng: <b>${got.toFixed(1)} / ${tot}</b> (normerat ${(got * 100 / tot).toFixed(1)} av 100) + quizpoäng ${qp} = <b>${total.toFixed(1)}</b> ⇒ betyg <b>${grade}</b>.</p><p class="muted small">Spara rättningen på varje fråga ("Spara rättning") för att räkna med den.</p><button class="btn" id="saveres">Spara resultat</button>` : `<p class="muted">Lämna in för att se facit och rätta dig själv.</p>`;
-      const sr = $("#saveres", m); if (sr) sr.onclick = () => { st.result = +(got * 100 / tot).toFixed(1); save(); toast("Resultat sparat"); };
-    };
-    showRes();
+    m.innerHTML = `<p class="small"><a href="#mock">Alla provtentor</a></p>
+      <div class="sticky-timer row spread"><div><div class="timer" id="tm">4:00:00</div><div class="meta">${def.name} · ${tot} poäng</div></div>
+        <div class="row"><button class="btn primary" id="tg">${st.runFrom ? "Pausa" : st.acc ? "Fortsätt" : "Starta timern"}</button><button class="btn" id="fin">${st.done ? "Dölj facit" : "Lämna in och rätta"}</button><button class="btn ghost sm" id="rs">Börja om</button></div></div>
+      <p class="muted">Answer in English. Explain notions, concepts and symbols. If a question is vaguely formulated, state your assumptions. At most one page per short question; the essay at most three pages without equations.</p>
+      ${def.parts.map(p => `<h2>${p.title} <span class="meta">${p.ids.reduce((s, i) => s + EXAMQ.find(q => q.id === i).pts, 0)} p</span></h2><div class="qlist">${p.ids.map(i => examRow(EXAMQ.find(q => q.id === i), { open: true, reveal: !!st.done })).join("")}</div>`).join("")}
+      <div class="section" id="res"></div>`;
+    bindExam(m);
+    const got = qsAll.reduce((s, q) => s + ((S.exam[q.id] && S.exam[q.id].graded) ? S.exam[q.id].score : 0), 0);
+    const qp = +(S.quizPts || 0), total = got * 100 / tot + qp;
+    const grade = total >= 90 ? "A" : total >= 75 ? "B" : total >= 60 ? "C" : total >= 50 ? "D" : total >= 45 ? "E" : "F";
+    $("#res", m).innerHTML = st.done ? `<h2>Resultat</h2><p>${got.toFixed(1)} av ${tot} poäng (${(got * 100 / tot).toFixed(1)} av 100) plus ${qp} quizpoäng blir <b>${total.toFixed(1)}</b>, alltså betyg <b>${grade}</b>.</p><p class="meta">Bara frågor där du klickat "Spara poängen" räknas.</p><button class="btn" id="saveres">Spara resultatet</button>` : "";
+    const sr = $("#saveres", m); if (sr) sr.onclick = () => { st.result = +(got * 100 / tot).toFixed(1); save(); toast("Resultatet sparat"); };
     const tick = () => { const e = elapsed(), left = Math.max(0, LIMIT - e); const h = Math.floor(left / 3600), mi = Math.floor(left % 3600 / 60), s = Math.floor(left % 60);
       const el = $("#tm"); if (el) { el.textContent = `${h}:${String(mi).padStart(2, "0")}:${String(s).padStart(2, "0")}`; el.style.color = left < 900 ? "var(--bad)" : ""; } };
     tick(); mockTick = setInterval(tick, 1000);
     $("#tg", m).onclick = () => { if (st.runFrom) { st.acc = elapsed(); st.runFrom = null; } else { st.runFrom = Date.now(); st.start = st.start || Date.now(); } save(); $("#tg", m).textContent = st.runFrom ? "Pausa" : "Fortsätt"; };
     $("#fin", m).onclick = () => { if (st.runFrom) { st.acc = elapsed(); st.runFrom = null; } st.done = !st.done; save(); route(); };
-    $("#rs", m).onclick = () => { if (confirm("Nollställ timer och inlämning (dina svar sparas)?")) { delete S.mock[id]; if (id === "random") S.mock.random = { def }; save(); route(); } };
+    $("#rs", m).onclick = () => { if (confirm("Nollställ timern och inlämningen? Dina skrivna svar sparas.")) { delete S.mock[id]; if (id === "random") S.mock.random = { def }; save(); route(); } };
   }
 
   // ---------- Räkneträning ----------
-  let drillCur = null;
   VIEWS.rakna = (m, r) => {
     const sel = r.params.t ? r.params.t.split(",") : [];
     const gens = Drills.GEN.map((g, i) => ({ ...g, i })).filter(g => !sel.length || sel.includes(g.t));
-    m.innerHTML = `<div class="hero"><div><h1>Räkneträning</h1><p>${Drills.GEN.length} typer av räkneuppgifter från tentorna och problem seten – nya siffror varje gång.</p></div></div>
-      ${chipsHTML(sel)}
-      <div class="row" style="margin-bottom:12px"><select id="gsel"><option value="rand">🎲 Blandat</option>${gens.map(g => `<option value="${g.i}">${topicName(g.t)} – ${g.name}</option>`).join("")}</select><button class="btn primary" id="new">Ny uppgift</button></div>
-      <div id="drill"></div>
-      <div class="card"><h3 style="margin-top:0">Statistik</h3><div class="small">${Drills.GEN.map((g, i) => { const s = S.drills[i]; return s ? `<div class="row spread"><span>${g.name}</span><span class="muted">${s.c}/${s.n} rätt</span></div>` : ""; }).join("") || '<span class="muted">Inga uppgifter gjorda än.</span>'}</div></div>`;
-    bindChips(m, sel, s => location.hash = "rakna" + (s.length ? "?t=" + s.join(",") : ""));
+    m.innerHTML = head("Räkneträning", "Räkneuppgifter av samma typ som på tentorna och i problem seten, med nya siffror varje gång.") +
+      `${filterHTML(sel)}
+      <div class="row" style="margin-bottom:20px"><select id="gsel" aria-label="Uppgiftstyp"><option value="rand">Blandade uppgifter</option>${gens.map(g => `<option value="${g.i}">${g.name}</option>`).join("")}</select><button class="btn" id="new">Ny uppgift</button></div>
+      <div id="drill"></div>`;
+    bindFilter(m, sel, s => location.hash = "rakna" + (s.length ? "?t=" + s.join(",") : ""));
     const make = () => {
       const v = $("#gsel", m).value;
       const g = v === "rand" ? gens[Math.floor(Math.random() * gens.length)] : Drills.GEN[+v];
       if (!g) return;
-      drillCur = { gi: g.i ?? Drills.GEN.indexOf(g), ...g.g() };
-      const d = drillCur;
-      $("#drill", m).innerHTML = `<div class="card"><div class="q-head"><span class="tag">${topicName(Drills.GEN[d.gi].t)}</span><b>${Drills.GEN[d.gi].name}</b></div><p>${d.q}</p>
+      const gi = Drills.GEN.findIndex(x => x.name === g.name), d = { gi, ...g.g() };
+      const stat = S.drills[gi];
+      $("#drill", m).innerHTML = `<div class="panel read"><div class="row spread"><b>${Drills.GEN[gi].name}</b><span class="meta">${topicName(Drills.GEN[gi].t)}${stat ? ` · ${stat.c} av ${stat.n} rätt hittills` : ""}</span></div><p style="margin-top:10px">${d.q}</p>
         <div class="drill-ans">${d.ans.map((a, k) => `<label>${a.label}<input type="text" inputmode="decimal" data-k="${k}"></label>`).join("")}</div>
-        <div class="row"><button class="btn primary" id="chk">Kontrollera</button><button class="btn" id="sol">Visa lösning</button></div><div id="fb" style="margin-top:10px"></div></div>`;
+        <div class="row"><button class="btn primary" id="chk">Kontrollera</button><button class="btn ghost" id="sol">Visa lösningen</button></div><div id="fb" style="margin-top:12px"></div></div>`;
       math($("#drill", m));
       const check = () => {
         let all = true;
-        const res = d.ans.map((a, k) => { const inp = $(`input[data-k="${k}"]`, m); const v = parseFloat(inp.value.replace(",", ".").replace("%", "")); const ok = isFinite(v) && Math.abs(v - a.v) <= a.tol; if (!ok) all = false; inp.style.borderColor = ok ? "var(--good)" : "var(--bad)"; return ok; });
-        const s = S.drills[d.gi] || { n: 0, c: 0 }; s.n++; if (all) s.c++; S.drills[d.gi] = s; save();
-        $("#fb", m).innerHTML = `<span class="${all ? "ok" : "no"}">${all ? "Rätt!" : "Inte riktigt – " + res.filter(x => !x).length + " fel."}</span> <div class="expl">${d.sol}</div>`;
+        d.ans.forEach((a, k) => { const inp = $(`input[data-k="${k}"]`, m); const val = parseFloat(inp.value.replace(",", ".").replace("%", "")); const ok = isFinite(val) && Math.abs(val - a.v) <= a.tol; if (!ok) all = false; inp.style.borderColor = ok ? "var(--good)" : "var(--bad)"; });
+        const s = S.drills[gi] || { n: 0, c: 0 }; s.n++; if (all) s.c++; S.drills[gi] = s; save();
+        $("#fb", m).innerHTML = `<span class="${all ? "ok" : "no"}">${all ? "Rätt." : "Inte riktigt. De röda fälten stämmer inte."}</span><div class="expl">${d.sol}</div>`;
         math($("#fb", m));
       };
       $("#chk", m).onclick = check;
@@ -2132,14 +2225,15 @@ const App = (() => {
       $("#sol", m).onclick = () => { $("#fb", m).innerHTML = `<div class="expl">${d.sol}</div>`; math($("#fb", m)); };
     };
     $("#new", m).onclick = make;
+    $("#gsel", m).onchange = make;
     make();
   };
 
   // ---------- Simulatorer ----------
   VIEWS.sim = (m, r) => {
     const tab = r.sub === "asad" ? "asad" : "solow";
-    m.innerHTML = `<div class="hero"><div><h1>Simulatorer</h1><p>Se exakt hur diagrammen på tentan ska se ut – och hur ekonomin rör sig period för period.</p></div></div>
-      <div class="chips"><a class="chip ${tab === "solow" ? "on" : ""}" href="#sim/solow" style="text-decoration:none">Solowmodellen</a><a class="chip ${tab === "asad" ? "on" : ""}" href="#sim/asad" style="text-decoration:none">AS–AD med förväntningar</a></div>
+    m.innerHTML = head("Simulatorer", "Se hur diagrammen på tentan ska se ut och hur ekonomin rör sig efter en chock, period för period.") +
+      `<div class="subtabs" style="margin-top:0"><a class="${tab === "solow" ? "on" : ""}" href="#sim/solow">Solowmodellen</a><a class="${tab === "asad" ? "on" : ""}" href="#sim/asad">AS–AD</a></div>
       <div id="simroot"></div>`;
     const root = $("#simroot", m);
     if (tab === "solow") Sim.solowRender(root, r.params.sc); else Sim.asadRender(root, r.params.sc);
@@ -2151,35 +2245,36 @@ const App = (() => {
     const sel = r.params.t ? r.params.t.split(",") : [];
     const pool = FLASH.map((f, i) => ({ t: f[0], term: f[1], def: f[2], i })).filter(f => !sel.length || sel.includes(f.t));
     const box = f => S.flash[f.i] || 0;
-    const counts = [0, 1, 2, 3].map(b => pool.filter(f => Math.min(3, box(f)) === b).length);
-    const nextCard = () => {
-      const w = pool.map(f => ({ f, w: [8, 4, 2, 1][Math.min(3, box(f))] * Math.random() })).sort((a, b) => b.w - a.w);
-      let c = w[0] && w[0].f; if (c && flashCur && c.i === flashCur.i && w[1]) c = w[1].f; return c;
-    };
-    flashCur = nextCard();
-    m.innerHTML = `<div class="hero"><div><h1>Flashcards</h1><p>Begrepp → definition. Leitner-system: kort du kan visas mer sällan.</p></div></div>
-      ${chipsHTML(sel)}
-      <div class="row small muted" style="margin-bottom:10px">Nya: ${counts[0]} · Låda 1: ${counts[1]} · Låda 2: ${counts[2]} · Kan: ${counts[3]}</div>
-      ${flashCur ? `<div class="flash" id="fc"><div class="inner"><div class="face"><span class="tag">${topicName(flashCur.t)}</span><div class="term" style="margin-top:12px">${esc(flashCur.term)}</div><div class="small muted" style="margin-top:14px">Klicka / mellanslag för att vända</div></div><div class="face back"><div>${esc(flashCur.def)}</div></div></div></div>
-      <div class="row" style="justify-content:center;margin-top:16px"><button class="btn" id="no">← Kunde inte</button><button class="btn primary" id="yes">Kunde →</button></div>` : `<p class="muted">Inga kort.</p>`}`;
-    bindChips(m, sel, s => location.hash = "flash" + (s.length ? "?t=" + s.join(",") : ""));
+    const known = pool.filter(f => box(f) >= 3).length;
+    const w = pool.map(f => ({ f, w: [8, 4, 2, 1][Math.min(3, box(f))] * Math.random() })).sort((a, b) => b.w - a.w);
+    let c = w[0] && w[0].f; if (c && flashCur && c.i === flashCur.i && w[1]) c = w[1].f; flashCur = c;
+    m.innerHTML = head("Flashcards", "Begrepp på ena sidan, förklaring på andra. Kort du kan visas mer sällan.") +
+      `${filterHTML(sel)}<p class="meta" style="text-align:center">${known} av ${pool.length} kort sitter</p>
+      ${flashCur ? `<div class="flash" id="fc" tabindex="0" role="button" aria-label="Vänd kortet"><div class="inner"><div class="face"><div class="meta">${topicName(flashCur.t)}</div><div class="term" style="margin-top:10px">${esc(flashCur.term)}</div></div><div class="face back"><div>${esc(flashCur.def)}</div></div></div></div>
+      <div class="row" style="justify-content:center;margin-top:18px"><button class="btn" id="no">Kunde inte</button><button class="btn primary" id="yes">Kunde</button></div>
+      <p class="meta" style="text-align:center;margin-top:12px">Mellanslag vänder kortet, pilarna svarar.</p>` : `<p class="muted">Inga kort för det här urvalet.</p>`}`;
+    bindFilter(m, sel, s => location.hash = "flash" + (s.length ? "?t=" + s.join(",") : ""));
     if (!flashCur) return;
     const fc = $("#fc", m);
     fc.onclick = () => fc.classList.toggle("flip");
     const rate = ok => { S.flash[flashCur.i] = ok ? Math.min(3, box(flashCur) + 1) : 0; save(); VIEWS.flash(m, r); };
     $("#yes", m).onclick = () => rate(true); $("#no", m).onclick = () => rate(false);
-    document.onkeydown = e => { if (!location.hash.startsWith("#flash")) return; if (e.key === " ") { e.preventDefault(); fc.classList.toggle("flip"); } else if (e.key === "ArrowRight") rate(true); else if (e.key === "ArrowLeft") rate(false); };
+    document.onkeydown = e => { if (e.key === " ") { e.preventDefault(); fc.classList.toggle("flip"); } else if (e.key === "ArrowRight") rate(true); else if (e.key === "ArrowLeft") rate(false); };
   };
 
   // ---------- Strategi ----------
-  VIEWS.strategi = (m) => { m.innerHTML = `<div class="hero"><div><h1>Tentastrategi</h1><p>Format, tidsplan och vad som ger poäng hos Flodén.</p></div></div><div class="card">${STRATEGY}</div>`; };
+  VIEWS.strategi = (m) => { m.innerHTML = head("Tentastrategi", "Format, tidsplan och vad som ger poäng hos Flodén.") + `<div class="read">${STRATEGY}</div>`; };
 
   // ---------- Init ----------
-  function setTheme(t) { S.theme = t; save(); if (t) document.documentElement.dataset.theme = t; else delete document.documentElement.dataset.theme; }
+  function bindTheme() {
+    $$(".themebtn").forEach(b => b.onclick = () => {
+      const dark = matchMedia("(prefers-color-scheme: dark)").matches; const cur = S.theme || (dark ? "dark" : "light");
+      S.theme = cur === "dark" ? "light" : "dark"; save(); document.documentElement.dataset.theme = S.theme;
+    });
+  }
   function init() {
     load();
     if (S.theme) document.documentElement.dataset.theme = S.theme;
-    $$(".themebtn").forEach(b => b.onclick = () => { const dark = matchMedia("(prefers-color-scheme: dark)").matches; const cur = S.theme || (dark ? "dark" : "light"); setTheme(cur === "dark" ? "light" : "dark"); });
     window.addEventListener("hashchange", () => { if (!location.hash.startsWith("#quiz")) quizSession = null; route(); });
     route();
   }
